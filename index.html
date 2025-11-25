@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colin | Design & CX Leader</title>
+    <style>
+        /* --- GLOBAL VARIABLES & RESET --- */
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #111111;
+            --text-secondary: #555555;
+            --accent-bg: #F4F5F7;
+            --accent-blue: #0044CC;
+            --border-color: #e5e5e5;
+            --spacing-unit: 1rem;
+            --container-width: 1000px;
+            --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 2.75rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; color: var(--text-secondary); font-weight: 400; margin-bottom: 2rem; max-width: 700px; }
+        h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        p { color: var(--text-secondary); margin-bottom: 1rem; font-size: 1.05rem; }
+
+        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        a:hover { opacity: 0.7; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section { padding: 5rem 0; border-bottom: 1px solid var(--border-color); }
+        .section-last { border-bottom: none; }
+
+        .label {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            font-weight: 500;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--text-main);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- 1. HERO --- */
+        header { padding-top: 6rem; padding-bottom: 4rem; }
+
+        /* --- 2. SIGNAL BAR --- */
+        .signal-bar {
+            background-color: var(--accent-bg);
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .signal-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .signal-label { font-weight: 600; color: var(--text-main); margin-right: 1rem; }
+
+        /* --- 3. PILLARS --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .pillar-card { padding-right: 1rem; }
+        .pillar-num { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; display: block; opacity: 0.5;}
+
+        /* --- 4. FEATURED WORK --- */
+        .work-list { display: flex; flex-direction: column; gap: 3rem; }
+        .work-card {
+            display: grid;
+            grid-template-columns: 1fr 2fr; /* Left title, right content */
+            gap: 2rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid #eee;
+        }
+        .work-card:last-child { border-bottom: none; padding-bottom: 0; }
+
+        .work-meta h3 { margin-top: 0; }
+        .tag {
+            font-size: 0.8rem;
+            background: var(--accent-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        .outcome {
+            margin-top: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--text-main);
+            font-style: italic;
+            color: var(--text-main);
+        }
+        .work-link {
+            display: inline-block;
+            margin-top: 1rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--text-main);
+        }
+
+        /* --- 5. THOUGHT LEADERSHIP --- */
+        .thought-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+        .thought-card:hover { transform: translateY(-2px); border-color: var(--text-main); }
+        .thought-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem; display: block;}
+
+        /* --- 6. RIGHT FIT --- */
+        .fit-section { background-color: #F0F4F8; } /* Subtle blue-grey */
+        .fit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        ul.fit-list { list-style: none; padding-left: 1rem; }
+        ul.fit-list li { margin-bottom: 0.75rem; position: relative; color: var(--text-secondary); }
+        ul.fit-list li::before {
+            content: "•";
+            color: var(--accent-blue);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        /* --- 7. FOOTER --- */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .grid-3, .work-card, .fit-grid, .footer-grid { grid-template-columns: 1fr; }
+            .work-card { gap: 1rem; }
+            .signal-content { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            header { padding-top: 4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="container">
+        <h1>Designing AI-powered customer systems<br>that actually work in the real world.</h1>
+        <h2>I'm a senior design and CX leader sitting at the intersection of CRM, contact centers, and AI. I build the journeys, workflows, and platforms that move the needle for customers and the business.</h2>
+        <div class="btn-group">
+            <a href="#work" class="btn btn-primary">View Selected Work</a>
+            <a href="#" class="btn btn-secondary">Download Resume</a>
+        </div>
+    </header>
+
+    <div class="signal-bar">
+        <div class="container signal-content">
+            <span class="signal-label">Selected work with:</span>
+            <span>Fortune 50 Healthcare Payer</span>
+            <span>•</span>
+            <span>Global Auto (Ford, Sony-Honda)</span>
+            <span>•</span>
+            <span>Enterprise CX Platforms (Salesforce)</span>
+        </div>
+    </div>
+
+    <section class="section container">
+        <span class="label">What I Do</span>
+        <div class="grid-3">
+            <div class="pillar-card">
+                <span class="pillar-num">01</span>
+                <h3>AI-Powered CX Systems</h3>
+                <p>I design end-to-end customer and patient journeys—then align the contact center, CRM, data, and AI layers so the experience actually works across channels.</p>
+            </div>
+            <div class="pillar-card">
+                <span class="pillar-num">02</span>
+                <h3>Design Orgs That Deliver</h3>
+                <p>I build multidisciplinary teams and establish the operating models, rituals, and guardrails that allow Product and Engineering to move with high velocity.</p>
+            </div>
+            <div class="pillar-card">
+                <span class="pillar-num">03</span>
+                <h3>Outcomes, Not Decks</h3>
+                <p>I tie design to concrete business metrics: pipeline, adoption, CSAT, and cost-to-serve. If it doesn't improve the numbers, the job isn't done.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="section container">
+        <span class="label">Featured Work</span>
+        <div class="work-list">
+
+            <article class="work-card">
+                <div class="work-meta">
+                    <span class="tag">Strategy & Operating Model</span>
+                    <h3>Agentic AI for Enterprise CX</h3>
+                </div>
+                <div class="work-content">
+                    <p>Designed the experience and governance for an AI-powered "portal" unifying CRM and CCaaS. Worked across Ops and Engineering to ensure AI agents augmented human workflows rather than disrupting them.</p>
+                    <div class="outcome">Outcome: New GTM play with significant pipeline impact and reusable patterns for future AI initiatives.</div>
+                    <a href="#" class="work-link">Read Case Study →</a>
+                </div>
+            </article>
+
+            <article class="work-card">
+                <div class="work-meta">
+                    <span class="tag">Service Design & Strategy</span>
+                    <h3>Healthcare Consumer Journeys</h3>
+                </div>
+                <div class="work-content">
+                    <p>Led the translation of a high-level consumer vision into a portfolio of priority journeys for a major payer. Integrated regulatory constraints and workforce realities into a coherent roadmap.</p>
+                    <div class="outcome">Outcome: A clear operational path to improving access and navigation in a complex healthcare environment.</div>
+                    <a href="#" class="work-link">Read Case Study →</a>
+                </div>
+            </article>
+
+            <article class="work-card">
+                <div class="work-meta">
+                    <span class="tag">Operations & UX</span>
+                    <h3>Contact Center Modernization</h3>
+                </div>
+                <div class="work-content">
+                    <p>Partnered with IT and Ops to modernize a legacy contact center using AI-powered agent assist and CRM integration. Focused heavily on reducing agent friction and training time.</p>
+                    <div class="outcome">Outcome: Reduced AHT, improved first-contact resolution, and unlocked new automation opportunities.</div>
+                    <a href="#" class="work-link">Read Case Study →</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <section class="section container">
+        <span class="label">How I Think</span>
+        <div class="grid-3">
+            <a href="#" class="thought-card">
+                <span class="thought-title">When Channels Blur, Context Is Clarity</span>
+                <p>Why the shift from omnichannel to omnicontext changes the responsibilities of design leaders.</p>
+            </a>
+            <a href="#" class="thought-card">
+                <span class="thought-title">Designing Agentic Experiences</span>
+                <p>How to design governance and guardrails when the software acts on its own.</p>
+            </a>
+            <a href="#" class="thought-card">
+                <span class="thought-title">Design is Context Engineering</span>
+                <p>Moving beyond UI to design the logic and data flow that powers the interface.</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="section fit-section">
+        <div class="container">
+            <div class="fit-grid">
+                <div>
+                    <span class="label">Where I add the most value</span>
+                    <h3>I am best suited for Sr. Director / VP-level roles leading Design, CX, or AI Product experiences where:</h3>
+                </div>
+                <div>
+                    <ul class="fit-list">
+                        <li>CRM, contact center, and digital channels need to function as one ecosystem.</li>
+                        <li>AI is moving from "innovation lab" experiments into core operations.</li>
+                        <li>The organization values both customer experience and hard business efficiencies.</li>
+                    </ul>
+                    <div style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Recent Focus:</strong> Healthcare, Financial Services, Auto, Enterprise CX.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="section-last container" style="padding: 4rem 2rem;">
+        <div class="footer-grid">
+            <div>
+                <h3>About Colin</h3>
+                <p style="max-width: 500px;">I've spent my career at the intersection of design, CX operations, and enterprise tech—shipping work where the stakes are high. I'm motivated by making complex systems humane and helping organizations use AI to enhance human judgment, not replace it.</p>
+            </div>
+            <div>
+                <h3>Let's Talk</h3>
+                <p>If you need a leader who understands journeys and platforms end-to-end, let's connect.</p>
+                <div class="btn-group">
+                    <a href="mailto:your@email.com" class="btn btn-primary">Email Me</a>
+                    <a href="#" class="btn btn-secondary">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 4rem; opacity: 0.5; font-size: 0.8rem;">
+            © 2024 Colin. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
