@@ -7,7 +7,7 @@
     <style>
         /* --- GLOBAL VARIABLES & RESET --- */
         :root {
-            --bg-color: #FFF9F0;
+            --bg-color: #FFFCF7;
             --text-main: #2a2420;
             --text-secondary: #5a4f47;
             --accent-green: #D4856A;
@@ -76,39 +76,45 @@
         .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
 
         .btn {
-            padding: 0.9rem 1.8rem;
+            padding: 1rem 2.25rem;
             font-weight: 500;
             font-size: 0.95rem;
-            border-radius: 2px;
+            border-radius: 6px;
             cursor: pointer;
             border: 1px solid transparent;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
+            letter-spacing: 0.01em;
+            display: inline-block;
         }
 
         .btn-primary {
             background-color: var(--text-main);
             color: #fff;
+            box-shadow: 0 2px 8px rgba(42, 36, 32, 0.12);
         }
 
         .btn-primary:hover {
             background-color: var(--accent-green);
             opacity: 1;
+            box-shadow: 0 4px 12px rgba(212, 133, 106, 0.2);
+            transform: translateY(-1px);
         }
 
         .btn-secondary {
             background-color: transparent;
             color: var(--text-main);
-            border: 1px solid var(--text-main);
+            border: 1.5px solid var(--text-main);
         }
 
         .btn-secondary:hover {
             background-color: var(--text-main);
             color: #fff;
             opacity: 1;
+            transform: translateY(-1px);
         }
 
         /* --- 1. HERO --- */
-        header { padding-top: 8rem; padding-bottom: 5rem; }
+        header { padding-top: 12rem; padding-bottom: 5rem; }
 
         /* --- 2. SIGNAL BAR --- */
         .signal-bar {
@@ -351,30 +357,6 @@
                     <p>Led the translation of a high-level consumer vision into a portfolio of priority journeys for a major payer. Integrated regulatory constraints and workforce realities into a coherent roadmap.</p>
                     <div class="outcome">Outcome: A clear operational path to improving access and navigation in a complex healthcare environment.</div>
                     <a href="#" class="work-link">Read Case Study →</a>
-                </div>
-            </article>
-
-            <article class="work-card">
-                <div class="work-meta">
-                    <span class="tag">Operations & UX</span>
-                    <h3>Operational Intelligence for SMB Support</h3>
-                </div>
-                <div class="work-content">
-                    <p>Led CX strategy to rebuild trust in a global platform's SMB support experience. Designed AI-powered advisor tools that translated opaque policy decisions into actionable guidance, reducing friction for both customers and support teams.</p>
-                    <div class="outcome">Outcome: $624M in projected cost savings, $31.5B in revenue opportunity, and measurable trust restoration.</div>
-                    <a href="case-study-operational-intelligence.html" class="work-link">Read Case Study →</a>
-                </div>
-            </article>
-
-            <article class="work-card">
-                <div class="work-meta">
-                    <span class="tag">Service Design & Operations</span>
-                    <h3>Operational Intelligence: Service Under Pressure</h3>
-                </div>
-                <div class="work-content">
-                    <p>Designed an operational intelligence platform that empowered airline crew with real-time passenger context and flexible service recovery tools. Transformed compliance-driven interactions into human-centered problem solving.</p>
-                    <div class="outcome">Outcome: Reduced regulatory complaints by preventing dignity breakdowns, improved crew job satisfaction, and created a positive feedback loop between empowered staff and passenger experience.</div>
-                    <a href="operational-intelligence.html" class="work-link">Read Case Study →</a>
                 </div>
             </article>
 
