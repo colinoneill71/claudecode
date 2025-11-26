@@ -42,7 +42,7 @@
             line-height: 1.15;
         }
 
-        h1 { font-size: 3.5rem; margin-bottom: 2rem; font-weight: 500; max-width: 900px; }
+        h1 { font-size: 3.5rem; margin-bottom: 2rem; font-weight: 500; }
         h2 { font-size: 1.5rem; color: var(--text-secondary); font-weight: 400; margin-bottom: 2.5rem; max-width: 800px; line-height: 1.5; }
         h3 { font-size: 1.75rem; margin-bottom: 0.75rem; font-weight: 500; }
         p { color: var(--text-secondary); margin-bottom: 1.25rem; font-size: 1.1rem; line-height: 1.7; }
@@ -59,14 +59,14 @@
             padding: 0 3rem;
         }
 
-        .section { padding: 10rem 0; border-bottom: 1px solid var(--border-color); }
+        .section { padding: 6rem 0; border-bottom: 1px solid var(--border-color); }
         .section-last { border-bottom: none; }
 
         .label {
             text-transform: uppercase;
             font-size: 0.7rem;
             letter-spacing: 0.1em;
-            color: var(--accent-green);
+            color: var(--text-secondary);
             font-weight: 600;
             margin-bottom: 2rem;
             display: block;
@@ -114,9 +114,26 @@
         }
 
         /* --- 1. HERO --- */
-        header { padding-top: 10rem; padding-bottom: 5rem; }
+        header { padding-top: 12rem; padding-bottom: 5rem; }
 
-        /* --- 2. PILLARS --- */
+        /* --- 2. SIGNAL BAR --- */
+        .signal-bar {
+            background-color: transparent;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .signal-content {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        .signal-label { font-weight: 600; color: var(--text-main); margin-right: 0.5rem; font-size: 0.9rem; }
+
+        /* --- 3. PILLARS --- */
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -125,7 +142,7 @@
         .pillar-card { padding-right: 1.5rem; }
         .pillar-num { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; display: block; opacity: 0.4; font-family: var(--font-family-body);}
 
-        /* --- 3. FEATURED WORK --- */
+        /* --- 4. FEATURED WORK --- */
         .work-list { display: flex; flex-direction: column; gap: 4rem; }
         .work-card {
             display: grid;
@@ -168,7 +185,7 @@
             opacity: 1;
         }
 
-        /* --- 4. THOUGHT LEADERSHIP --- */
+        /* --- 5. THOUGHT LEADERSHIP --- */
         .thought-card {
             background: transparent;
             border: none;
@@ -185,7 +202,7 @@
             line-height: 1.3;
         }
 
-        /* --- 5. RIGHT FIT --- */
+        /* --- 6. RIGHT FIT --- */
         .fit-section { background-color: #FFF3E6; } /* Soft warm peach */
         .fit-grid {
             display: grid;
@@ -203,7 +220,7 @@
             margin-left: -1em;
         }
 
-        /* --- 6. FOOTER --- */
+        /* --- 7. FOOTER --- */
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -244,10 +261,10 @@
             h1 { font-size: 2.25rem; }
             .grid-3, .work-card, .fit-grid, .footer-grid { grid-template-columns: 1fr; }
             .work-card { gap: 1.5rem; }
+            .signal-content { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
             header { padding-top: 6rem; }
             nav { padding: 1.5rem 2rem; }
             .container { padding: 0 2rem; }
-            .section { padding: 4rem 0; }
         }
     </style>
 </head>
@@ -258,18 +275,30 @@
         <div class="nav-links">
             <a href="#work">Work</a>
             <a href="#thinking">Thinking</a>
+            <a href="#leadership">Leadership</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
     <header class="container">
-        <h1>Designing <span class="accent">human-centered services</span> that turn enterprise complexity into <span class="accent">clarity & capability</span>.</h1>
-        <h2>I'm a senior design and CX leader working at the intersection of UX, DX and CX building AI-powered journeys, workflows, and platforms that move the needle for customers and the business.</h2>
+        <h1>Designing <span class="accent">AI-powered</span> customer systems<br>that actually work in the <span class="accent">real world.</span></h1>
+        <h2>I'm a senior design and CX leader sitting at the intersection of CRM, contact centers, and AI. I build the journeys, workflows, and platforms that move the needle for customers and the business.</h2>
         <div class="btn-group">
-            <a href="#work" class="btn btn-primary">Selected Work</a>
-            <a href="#" class="btn btn-secondary">Resume</a>
+            <a href="#work" class="btn btn-primary">View Selected Work</a>
+            <a href="#" class="btn btn-secondary">Download Resume</a>
         </div>
     </header>
+
+    <div class="signal-bar">
+        <div class="container signal-content">
+            <span class="signal-label">Selected work with:</span>
+            <span>Fortune 50 Healthcare Payer</span>
+            <span>•</span>
+            <span>Global Auto (Ford, Sony-Honda)</span>
+            <span>•</span>
+            <span>Enterprise CX Platforms (Salesforce)</span>
+        </div>
+    </div>
 
     <section class="section container">
         <span class="label">What I Do</span>
@@ -298,8 +327,8 @@
 
             <article class="work-card">
                 <div class="work-meta">
-                    <span class="tag">Experience Transformation</span>
-                    <h3>Trust at the point of friction</h3>
+                    <span class="tag">Mobile & Service Design</span>
+                    <h3>Air Canada Mobile Experience</h3>
                 </div>
                 <div class="work-content">
                     <p>Reimagined the end-to-end passenger journey through a unified mobile platform connecting booking, flight status, and customer service. Designed bilingual experiences with context-aware features that adapt to passenger needs in real-time.</p>
@@ -310,8 +339,8 @@
 
             <article class="work-card">
                 <div class="work-meta">
-                    <span class="tag">Strategic Framework</span>
-                    <h3>Agency in an age of agents</h3>
+                    <span class="tag">Strategy & Operating Model</span>
+                    <h3>Agentic AI for Enterprise CX</h3>
                 </div>
                 <div class="work-content">
                     <p>Designed the experience and governance for an AI-powered "portal" unifying CRM and CCaaS. Worked across Ops and Engineering to ensure AI agents augmented human workflows rather than disrupting them.</p>
@@ -322,8 +351,8 @@
 
             <article class="work-card">
                 <div class="work-meta">
-                    <span class="tag">Digital Transformation</span>
-                    <h3>Empowerment for a life in motion</h3>
+                    <span class="tag">Service Design & Strategy</span>
+                    <h3>Healthcare Consumer Journeys</h3>
                 </div>
                 <div class="work-content">
                     <p>Led the translation of a high-level consumer vision into a portfolio of priority journeys for a major payer. Integrated regulatory constraints and workforce realities into a coherent roadmap.</p>
@@ -353,7 +382,7 @@
         </div>
     </section>
 
-    <section class="section container">
+    <section id="leadership" class="section container">
         <span class="label">Leadership</span>
         <div class="grid-3">
             <div class="thought-card">
