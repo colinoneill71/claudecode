@@ -1,0 +1,23 @@
+ACTION REQUIRED: Save Your Uploaded Images
+==========================================
+
+You uploaded two Air Canada mobile app images in the chat. 
+Please save them with these exact filenames:
+
+1. air-canada-mobile-1.jpg
+   (The image showing two phones with customer profile and booking interface)
+
+2. air-canada-mobile-2.jpg
+   (The image showing two phones with flight in progress and French communication)
+
+TO SAVE THE IMAGES:
+------------------
+1. Right-click on each image in the chat
+2. Save them to the /home/user/claudecode/images/ directory
+3. Use the exact filenames shown above
+
+Once saved, the case study at air-canada-case-study.html will display them properly.
+
+Alternatively, if you have the images elsewhere, you can copy them:
+  cp /path/to/your/first-image.jpg images/air-canada-mobile-1.jpg
+  cp /path/to/your/second-image.jpg images/air-canada-mobile-2.jpg
