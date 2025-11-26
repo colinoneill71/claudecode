@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operational Intelligence: Service Under Pressure | Colin O'Neill</title>
+    <style>
+        /* --- GLOBAL VARIABLES & RESET --- */
+        :root {
+            --bg-color: #FFF9F0;
+            --text-main: #2a2420;
+            --text-secondary: #5a4f47;
+            --accent-green: #D4856A;
+            --accent-olive: #C99A6E;
+            --accent-bg: #FFF3E6;
+            --border-color: #F0E4D7;
+            --spacing-unit: 1rem;
+            --container-width: 900px;
+            --font-family-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-family-heading: 'Georgia', 'Times New Roman', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-family-heading);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+            line-height: 1.8;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.2s;
+        }
+
+        a:hover {
+            opacity: 0.7;
+        }
+
+        .accent {
+            color: var(--accent-green);
+        }
+
+        em {
+            font-style: italic;
+            color: var(--text-main);
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .label {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav .logo {
+            font-family: var(--font-family-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav .nav-links a {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: text-decoration-color 0.2s;
+        }
+
+        nav .nav-links a:hover {
+            text-decoration-color: var(--text-secondary);
+            opacity: 1;
+        }
+
+        /* --- CASE STUDY HEADER --- */
+        .case-study-header {
+            padding: 4rem 0 3rem;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-green);
+            font-family: var(--font-family-heading);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        /* --- CASE STUDY CONTENT --- */
+        .case-study-content {
+            padding: 3rem 0 6rem;
+        }
+
+        .pullquote {
+            margin: 3rem 0;
+            padding: 2rem;
+            background-color: var(--accent-bg);
+            border-left: 4px solid var(--accent-green);
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            font-style: italic;
+        }
+
+        .insight-box {
+            margin: 2.5rem 0;
+            padding: 2rem;
+            background-color: var(--accent-bg);
+            border-radius: 2px;
+        }
+
+        .insight-box h3 {
+            margin-top: 0;
+            color: var(--accent-green);
+        }
+
+        ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        ul li {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            font-size: 1.125rem;
+        }
+
+        ul li::marker {
+            color: var(--accent-green);
+        }
+
+        /* --- BACK LINK --- */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .back-link:hover {
+            border-bottom-color: var(--accent-green);
+            opacity: 1;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            h3 { font-size: 1.25rem; }
+            p, ul li { font-size: 1rem; }
+            .pullquote { font-size: 1.1rem; }
+            .container { padding: 0 2rem; }
+            nav { padding: 1.5rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Colin O'Neill</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#work">Work</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <article class="container">
+        <a href="index.html#work" class="back-link">← Back to Work</a>
+
+        <header class="case-study-header">
+            <span class="label">Case Study</span>
+            <div class="subtitle">Operational Intelligence</div>
+            <h1>Service Under Pressure</h1>
+        </header>
+
+        <section class="case-study-content">
+            <p>The passenger in 14C wasn't trying to make trouble. He'd flown this route dozens of times and made the connecting flight on time. But on this trip, something changed. The departure board showed "Delayed" with no context. The gate announcement came late and contradicted what his app said. Onboard, the crew was polite, but they had no real-time information to share. When turbulence hit, small frustrations compounded—the drink service stopped one row before his, connection information remained vague, and every interaction reinforced the same message: the system wasn't working for him today, and he was on his own.</p>
+
+            <div class="pullquote">
+                By the time the plane touches down, 14C isn't just tired. He's feeling that strange cocktail of sore, restless, and mad-at-the-world that only air travel can produce. The compensation claim wasn't about money—it was about acknowledgment that his experience mattered. This was about dignity, not duration. That insight changed everything about how we approached the solution.
+            </div>
+
+            <h2>What We Saw in the Jumpseat</h2>
+
+            <p>For two weeks, we sat with crew members during their shifts, in galley conversations between services, at gates during boarding chaos, in jumpseat conversations where they admitted what they couldn't say to passengers. What emerged was a map of system constraints and small human failures that create big regulatory exposure.</p>
+
+            <ul>
+                <li>Flight attendants forced to deliver updates they knew were wrong because ground control hadn't updated the crew app.</li>
+                <li>Gate agents apologizing for delays they couldn't explain because operations hadn't shared the real reason.</li>
+                <li>Crew members saying "we'll have someone meet you at the gate" knowing no one would be there, because the system had no way to coordinate ground support.</li>
+            </ul>
+
+            <p><strong>The escalation trap:</strong> Every "I don't know" forced crew into an impossible position—apologize for information they don't control, or escalate to overwhelmed supervisors who also lack real-time context. Meanwhile, 200 passengers watch this theater of powerlessness play out, learning that nobody on the flight has the tools or authority to actually help them. The crew weren't failing. The system was failing them, and passengers could sense it.</p>
+
+            <h2>A Thousand Little Cuts</h2>
+
+            <p>The most damaging moments weren't dramatic service failures. They were tiny inconsistencies that accumulated into a passenger's overall sense of being dismissed:</p>
+
+            <p><strong>Information inconsistency:</strong> Departure boards, mobile apps, gate displays, and crew announcements all showing different information. Passengers spend the first 20 minutes of every delay trying to figure out which source to trust, already frustrated before they even talk to anyone.</p>
+
+            <p><strong>Communication gaps:</strong> Crew receiving delay updates through one system while passengers get notifications through another, creating conversations where staff are less informed than the people they're supposed to be helping.</p>
+
+            <p><strong>Authority confusion:</strong> Ground agents who can rebook but can't offer compensation. Flight attendants who can provide service gestures but can't access passenger loyalty status. Gate agents who can delay boarding but can't communicate with operations about ground transportation. Every interaction teaches passengers that nobody they're talking to has the power to actually solve their problem.</p>
+
+            <p><strong>Resolution theater:</strong> The standard script of "we'll have someone meet you when you land" when systems show no record of ground support being dispatched. The crew know it's not true, passengers sense it's not true, but the process requires the performance anyway.</p>
+
+            <p>These weren't edge cases. They were the daily reality of airline operations, and each one contributed to a passenger's decision to escalate formal complaints instead of accepting service recovery.</p>
+
+            <h2>Human-Centered Design Principles</h2>
+
+            <p>Understanding that dignity mattered more than duration completely changed our design approach. Every solution had to pass one test: does this help crew treat passengers like people who matter, or does it just make compliance easier?</p>
+
+            <div class="insight-box">
+                <h3>Real-time context over efficiency metrics</h3>
+                <p>Instead of optimizing for speed, we optimized for crew confidence. The platform had to surface enough passenger context that crew could have actual conversations about solutions, not just read scripts about policies. A flight attendant seeing that a passenger is traveling for a family emergency approaches service recovery differently than someone managing a routine business trip.</p>
+            </div>
+
+            <div class="insight-box">
+                <h3>Authority over automation</h3>
+                <p>Rather than automating interactions, we focused on empowering human judgment. Crew needed flexible options they could deploy immediately based on the specific situation and passenger needs. Empowering flight attendants to choose effectively between loyalty points vs rebooking priority, or lounge access vs meal vouchers encourages real-world problem solving, not rigid policy trees that treat every delay the same way.</p>
+            </div>
+
+            <div class="insight-box">
+                <h3>Proactive recovery over reactive compliance</h3>
+                <p>The goal shifted from "handle complaints efficiently" to "prevent situations where passengers lose confidence that anyone cares about their experience." This meant identifying problems before passengers felt them. Building a platform that could model rebooking connections before delays were announced, offering service gestures when systems predicted passenger frustration building, providing context before passengers had to ask for it.</p>
+            </div>
+
+            <h2>The Empowerment Feedback Loop</h2>
+
+            <p>Six months into rollout, something unexpected started happening in crew feedback sessions. Flight attendants stopped talking about the platform as a compliance tool and started describing it as job satisfaction improvement. Customer service representatives said passenger interactions became collaborative problem-solving instead of defensive policy recitation.</p>
+
+            <div class="pullquote">
+                When crew can actually help people, they want to help people. When they're equipped with context about passenger situations and flexible tools to address problems, service recovery becomes rewarding rather than exhausting.
+            </div>
+
+            <p>The platform didn't just change passenger experience—it helped improve the crew's sense of agency in their own jobs.</p>
+
+            <p>This created a positive feedback loop we hadn't anticipated. Crew who felt empowered to solve problems were more proactive about identifying them. Passengers interacting with confident, well-equipped crew were more likely to accept service recovery gracefully. Regulatory complaints dropped not because policies changed, but because human interactions improved.</p>
+
+            <h2>The Broader Truth: Human Dignity Under Systemic Stress</h2>
+
+            <p>Regulatory compliance frameworks often assume rational actors making rational decisions about defined grievances. But real human behavior is driven by dignity, recognition, and agency. A compensation claim isn't just about money—it's about acknowledgment. An escalation to a regulator isn't just about policy violation—it's about someone finally paying attention to their experience.</p>
+
+            <p>The most expensive customer experience failures aren't service breakdowns, they're dignity breakdowns. Systems that treat people like cases to be processed rather than humans to be helped create regulatory exposure that's impossible to predict or model. You can forecast mechanical delays, but you can't forecast when someone will reach their dignity breaking point.</p>
+
+            <div class="pullquote">
+                Empowering frontline staff to restore dignity prevents escalations better than any compliance system. When people feel heard, understood, and treated with care during stressful situations, they're remarkably forgiving of operational failures. When they feel dismissed, invisible, or powerless, even minor problems become formal complaints.
+            </div>
+        </section>
+
+        <a href="index.html#work" class="back-link">← Back to Work</a>
+    </article>
+
+    <footer style="padding: 4rem 3rem; border-top: 1px solid var(--border-color); margin-top: 4rem; opacity: 0.5; font-size: 0.8rem; text-align: center;">
+        © 2024 Colin. All rights reserved.
+    </footer>
+
+</body>
+</html>
