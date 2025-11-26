@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Project Name] | Colin O'Neill</title>
+    <style>
+        /* --- GLOBAL VARIABLES & RESET --- */
+        :root {
+            --bg-color: #FFF9F0;
+            --text-main: #2a2420;
+            --text-secondary: #5a4f47;
+            --accent-green: #D4856A;
+            --accent-olive: #C99A6E;
+            --accent-bg: #FFF3E6;
+            --border-color: #F0E4D7;
+            --spacing-unit: 1rem;
+            --container-width: 1200px;
+            --font-family-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-family-heading: 'Georgia', 'Times New Roman', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-family-heading);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 1.5rem; font-weight: 500; }
+        h2 { font-size: 1.75rem; margin-bottom: 1.5rem; font-weight: 500; margin-top: 3rem; }
+        h3 { font-size: 1.25rem; margin-bottom: 1rem; font-weight: 500; }
+        p { color: var(--text-secondary); margin-bottom: 1.25rem; font-size: 1.1rem; line-height: 1.7; }
+
+        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        a:hover { opacity: 0.7; }
+
+        .accent { color: var(--accent-green); }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .container-narrow {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .section { padding: 4rem 0; }
+
+        .label {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        nav .logo {
+            font-family: var(--font-family-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
+        nav .back-link {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: text-decoration-color 0.2s;
+        }
+        nav .back-link:hover {
+            text-decoration-color: var(--text-secondary);
+            opacity: 1;
+        }
+
+        /* --- CASE STUDY HEADER --- */
+        .cs-header {
+            padding-top: 5rem;
+            padding-bottom: 3rem;
+        }
+
+        .cs-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .cs-meta-item h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-family: var(--font-family-body);
+            font-weight: 600;
+        }
+
+        .cs-meta-item p {
+            color: var(--text-main);
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* --- IMAGE LAYOUTS --- */
+
+        /* Hero Image - Full bleed at top */
+        .image-hero {
+            width: 100%;
+            margin: 4rem 0;
+            background-color: var(--accent-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .image-hero img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Featured Image - Contained with frame */
+        .image-featured {
+            max-width: var(--container-width);
+            margin: 4rem auto;
+            padding: 0 3rem;
+        }
+
+        .image-featured-inner {
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            background-color: #fff;
+        }
+
+        .image-featured img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-caption {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            text-align: center;
+        }
+
+        /* Two Column Images */
+        .image-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .image-grid-2 img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Three Column Images */
+        .image-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 4rem 0;
+        }
+
+        .image-grid-3 img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Full Width Image with Subtle Background */
+        .image-full-bg {
+            background-color: var(--accent-bg);
+            padding: 5rem 0;
+            margin: 4rem 0;
+        }
+
+        .image-full-bg img {
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Inset Image - Floats within text */
+        .image-inset {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+        }
+
+        .image-inset img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Image placeholder styling */
+        .image-placeholder {
+            background: linear-gradient(135deg, var(--accent-bg) 0%, #fff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-style: italic;
+            border: 1px dashed var(--border-color);
+        }
+
+        /* --- CONTENT SECTIONS --- */
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .outcome-box {
+            margin: 3rem 0;
+            padding: 2rem 2.5rem;
+            background-color: var(--accent-bg);
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .outcome-box h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-family: var(--font-family-body);
+        }
+
+        .outcome-box p {
+            color: var(--text-main);
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* --- FOOTER --- */
+        .cs-footer {
+            margin-top: 6rem;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .cs-footer h3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .cs-footer a {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--text-main);
+            color: #fff;
+            border-radius: 2px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .cs-footer a:hover {
+            background-color: var(--accent-green);
+            opacity: 1;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            .cs-meta { grid-template-columns: 1fr; gap: 1.5rem; }
+            .image-grid-2, .image-grid-3 { grid-template-columns: 1fr; }
+            .container, .container-narrow { padding: 0 2rem; }
+            .image-featured { padding: 0 1.5rem; }
+            .image-featured-inner { padding: 1rem; }
+            nav { padding: 1.5rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Colin O'Neill</div>
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+    </nav>
+
+    <header class="cs-header container-narrow">
+        <span class="label">[Project Category]</span>
+        <h1>[Project Title]</h1>
+        <p class="accent" style="font-size: 1.2rem; margin-bottom: 2rem;">[One-line project summary or value proposition]</p>
+
+        <div class="cs-meta">
+            <div class="cs-meta-item">
+                <h3>Role</h3>
+                <p>[Your role]</p>
+            </div>
+            <div class="cs-meta-item">
+                <h3>Timeline</h3>
+                <p>[Project duration]</p>
+            </div>
+            <div class="cs-meta-item">
+                <h3>Focus Areas</h3>
+                <p>[Key focus areas]</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Image - Full width, edge-to-edge -->
+    <div class="image-hero">
+        <div class="image-placeholder">
+            [Hero Image: Project overview or key visual - 1200×600px recommended]
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <article class="container-narrow">
+
+        <div class="content-section">
+            <h2>The Challenge</h2>
+            <p>[Describe the business challenge, customer pain points, or opportunity that sparked this project. Be specific about constraints, stakeholders, or organizational context.]</p>
+            <p>[Additional context about the problem space.]</p>
+        </div>
+
+        <!-- Featured Image with Frame -->
+        <div class="image-featured">
+            <div class="image-featured-inner">
+                <div class="image-placeholder" style="min-height: 300px;">
+                    [Featured Image: Process diagram, journey map, or research insights - 800×500px recommended]
+                </div>
+                <p class="image-caption">[Caption describing what this image shows]</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>The Approach</h2>
+            <p>[Explain your methodology, how you worked cross-functionally, what frameworks or tools you used. Focus on the strategic decisions you made and why.]</p>
+            <p>[Details about research, workshops, prototyping, or validation approaches.]</p>
+        </div>
+
+        <!-- Two Column Image Grid -->
+        <div class="container">
+            <div class="image-grid-2">
+                <div>
+                    <div class="image-placeholder" style="min-height: 300px;">
+                        [Image: Wireframes or sketches]
+                    </div>
+                    <p class="image-caption">[Caption for left image]</p>
+                </div>
+                <div>
+                    <div class="image-placeholder" style="min-height: 300px;">
+                        [Image: Workshop or collaboration]
+                    </div>
+                    <p class="image-caption">[Caption for right image]</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>The Solution</h2>
+            <p>[Describe the final solution, the key features or experiences you designed, and how it addressed the challenge. Include technical and operational considerations.]</p>
+            <p>[Additional implementation details or design decisions.]</p>
+        </div>
+
+    </article>
+
+    <!-- Full Width Image with Background -->
+    <div class="image-full-bg">
+        <div class="image-placeholder" style="max-width: 1000px; margin: 0 auto;">
+            [Full Width Image: Final product, dashboard, or system diagram - 1000×600px recommended]
+        </div>
+        <p class="image-caption" style="max-width: 1000px; margin: 1rem auto 0;">[Caption for the full-width image]</p>
+    </div>
+
+    <article class="container-narrow">
+
+        <!-- Inset Image within Content -->
+        <div class="content-section">
+            <h3>Key Features</h3>
+            <p>[Describe specific features or capabilities of your solution.]</p>
+
+            <div class="image-inset">
+                <div class="image-placeholder" style="min-height: 250px;">
+                    [Inset Image: Detail view or specific feature - 500×350px recommended]
+                </div>
+                <p class="image-caption">[Caption for inset image]</p>
+            </div>
+
+            <p>[Continue describing the solution and its components.]</p>
+        </div>
+
+        <!-- Three Column Image Grid -->
+        <div class="content-section">
+            <h3>Visual Examples</h3>
+        </div>
+
+    </article>
+
+    <div class="container">
+        <div class="image-grid-3">
+            <div>
+                <div class="image-placeholder" style="min-height: 250px;">
+                    [Image 1]
+                </div>
+            </div>
+            <div>
+                <div class="image-placeholder" style="min-height: 250px;">
+                    [Image 2]
+                </div>
+            </div>
+            <div>
+                <div class="image-placeholder" style="min-height: 250px;">
+                    [Image 3]
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <article class="container-narrow">
+
+        <!-- Outcome Box -->
+        <div class="outcome-box">
+            <h3>Impact & Outcomes</h3>
+            <p>[Specific, measurable results: metrics improved, adoption rates, business impact, user satisfaction scores, cost savings, or operational efficiencies achieved.]</p>
+        </div>
+
+        <div class="content-section">
+            <h2>What I Learned</h2>
+            <p>[Reflect on what worked, what was challenging, and what you'd do differently. Be honest about constraints or trade-offs.]</p>
+            <p>[Key takeaways that inform your practice or approach to future work.]</p>
+        </div>
+
+        <!-- Case Study Footer -->
+        <div class="cs-footer">
+            <h3>Want to discuss this project?</h3>
+            <a href="mailto:your@email.com">Get in Touch</a>
+        </div>
+
+    </article>
+
+</body>
+</html>
