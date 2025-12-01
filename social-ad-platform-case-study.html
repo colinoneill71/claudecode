@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Trust at the Point of Friction | Social Ad Platform Case Study</title>
+    <style>
+        /* --- GLOBAL VARIABLES & RESET --- */
+        :root {
+            --bg-color: #FFF9F0;
+            --text-main: #2a2420;
+            --text-secondary: #5a4f47;
+            --accent-green: #D4856A;
+            --accent-olive: #C99A6E;
+            --accent-bg: #FFF3E6;
+            --border-color: #F0E4D7;
+            --spacing-unit: 1rem;
+            --container-width: 1200px;
+            --font-family-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-family-heading: 'Georgia', 'Times New Roman', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-family-heading);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 1.5rem; font-weight: 500; }
+        h2 { font-size: 2rem; color: var(--text-main); font-weight: 500; margin-bottom: 1.5rem; margin-top: 3rem; }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; font-weight: 500; }
+        p { color: var(--text-secondary); margin-bottom: 1.25rem; font-size: 1.1rem; line-height: 1.7; }
+
+        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        a:hover { opacity: 0.7; }
+
+        .accent { color: var(--accent-green); }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .section { padding-top: 4rem; padding-bottom: 4rem; }
+
+        .label {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        nav .logo {
+            font-family: var(--font-family-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
+        nav .back-link {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: text-decoration-color 0.2s;
+        }
+        nav .back-link:hover {
+            text-decoration-color: var(--text-secondary);
+            opacity: 1;
+        }
+
+        /* --- CASE STUDY HERO --- */
+        .case-hero {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .meta-item h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-family: var(--font-family-body);
+        }
+        .meta-item p {
+            font-size: 1rem;
+            color: var(--text-main);
+            margin: 0;
+        }
+
+        /* --- CONTENT SECTIONS --- */
+        .content-section {
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        .highlight-box {
+            background: var(--accent-bg);
+            padding: 2rem;
+            border-left: 4px solid var(--accent-green);
+            margin: 2rem 0;
+        }
+        .highlight-box h3 {
+            margin-top: 0;
+        }
+
+        .quote-box {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--accent-green);
+            background: var(--accent-bg);
+        }
+
+        ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+        ul li {
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            .meta-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            nav { padding: 1.5rem 2rem; }
+            .container { padding: 0 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Colin O'Neill</div>
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+    </nav>
+
+    <section class="case-hero">
+        <div class="container">
+            <span class="label">Case Study</span>
+            <h1>Engineering Trust at the Point of Friction</h1>
+            <p style="font-size: 1.25rem; max-width: 700px;">How we transformed a global ad platform's enforcement ecosystem from opaque policing to transparent partnership, empowering advisors to restore dignity and unlock $31.5B in potential revenue.</p>
+
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <h4>Client</h4>
+                    <p>Global Social Ad Platform</p>
+                </div>
+                <div class="meta-item">
+                    <h4>Role</h4>
+                    <p>Lead CX Strategy & Design</p>
+                </div>
+                <div class="meta-item">
+                    <h4>Impact</h4>
+                    <p>$624M cost savings, $31.5B revenue opportunity</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container content-section">
+            <h2>When Revenue Is Blocked, Livelihoods Are Blocked</h2>
+            <p>Small businesses built their livelihoods on our client's platform. Every ad dollar mattered. But when something went wrong, they were trapped in a maze of long wait times, opaque algorithm decisions and support agents with no real answers. Cases dragged on. Campaigns sat idle. For our client's customers that's not a tech support issue, its lost revenue and missed payroll.</p>
+
+            <p>One small business owner we interviewed, an MBA grad. running a small shoe company, put it bluntly: "When my account is blocked, my revenue is blocked." She was tech-savvy, data-driven and could run circles around most marketers in understanding performance metrics. But when her ads were blocked, she found herself staring at vague error messages and listening to advisors read lines they did not understand. Her talent and effort were not the problem. The system was.</p>
+
+            <p>For her, every day a campaign sat inactive was not an inconvenience. It was inventory that did not move and a payroll deadline creeping closer with no relief in sight.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container content-section">
+            <h2>The CX Breaking Point: When Trust Collapses</h2>
+            <p>Advertisers began to see our client less as a partner and more as a risk. Policy enforcement decisions were non-negotiable, and by design, they were not fully transparent. Our client could not reveal the rules of the system without making it easier for bad actors to exploit them. That is an operational reality. But the way it showed up for SMBs, with confusing messages, unexplained blocks, and stalled campaigns, left business owners feeling powerless.</p>
+
+            <div class="quote-box">
+                "I'm seeing there is an issue with actor-level enforcements on DRP vs non-DRP sellers. IDK what that means, but you have it for your notes."
+            </div>
+
+            <p>I call it our "Sir, this is a Wendy's" moment. Think about that. A shoe company owner, who just wants to sell pumps, hears jargon she will never understand. It's not the advisor's fault that they don't understand it either. And while that conversation drags on, ad campaigns are stalled, revenue is blocked and the advisor's average handle time is climbing. That is not support. That is gibberish theater.</p>
+
+            <p>When we followed up with her later in the project she told us: "We still don't know why our account was suspended in the first place. When it was eventually restored there was no reason provided and no accountability. That made it feel personal."</p>
+
+            <p>That line cut to the heart of the problem. When businesses feel targeted by the very platform they depend on, trust does not just erode. It breaks.</p>
+
+            <div class="highlight-box">
+                <h3>The Data Confirmed It</h3>
+                <p>In one of our most telling analyses, we found that 67% of case handling time was swallowed by process steps: entering notes, jumping between knowledge bases, escalating cases. Only 32% was true decision-making.</p>
+                <p>In one case, it took 33 separate process-oriented actions and 21 hours of handling time, only for the case to be closed with no resolution at all. Endless process, very little progress.</p>
+                <p>Advisors felt trapped too. They were smart, motivated people, but stuck playing messenger for system rules they were not allowed to interpret. Their performance metrics punished them for long calls. Every escalation added more time, more frustration and less trust.</p>
+                <p><strong>And when trust collapses, the business model is at risk. In fact, projections showed our client standing to lose 14% of SMB revenue in 2023.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container content-section">
+            <h2>Our Task: Reduce Impact Without Exposing the Black Box</h2>
+            <p>Our cross-functional team, led by CX Strategy & Design, set out to reframe the SMB support experience. The goal was not to dismantle the black box. It exists for good reasons. The work was about reducing its human and business impacts. SMB owners needed confidence that their livelihoods would not grind to a halt overnight because of an unexplained enforcement. Advisors needed tools that gave them credibility and clarity, not scripts they dreaded reading aloud.</p>
+
+            <h3>The mandate was clear:</h3>
+            <ul>
+                <li>Reduce inefficiencies that frustrated both customers and advisors.</li>
+                <li>Elevate agents into advisors who could truly partner with SMBs.</li>
+                <li>Define AI tools that respected policy opacity but translated outcomes into actionable, plain language.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container content-section">
+            <h2>The Strategy: Building Trust Where Policy Meets People</h2>
+
+            <h3>1. Empowered Advisors</h3>
+            <p>We reframed the advisor role around agency, not scripts. By shifting repetitive, low-value work to AI, advisors had the freedom to listen, interpret, and guide. Instead of passing along jargon, they could act as partners who helped business owners navigate complexity with confidence.</p>
+
+            <h3>2. Policy & Platform Intelligence</h3>
+            <p>The black box had to remain closed, but advisors no longer had to be trapped by it. We designed AI-driven alerts and natural language tools that translated policy outcomes into practical next steps. This gave advisors the ability to explain impacts in plain language and give SMBs clear choices, without exposing sensitive rules.</p>
+
+            <h3>3. Confidence Through Growth-Oriented Support</h3>
+            <p>Empowerment also meant helping advisors build longer-term relationships. With tiered support, personalized education, and loyalty incentives, advisors could guide SMBs beyond troubleshooting into growth strategies. The shoe store owner would no longer hear nonsense lines; she would hear actionable advice, delivered by someone with the tools and authority to back it up.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container content-section">
+            <h2>Why It Matters</h2>
+            <p>It is tempting to think of SMB support as a cost to be minimized: faster handle times, lower case volumes, fewer escalations. But our work showed the real value came from something deeper. Trust and empowerment.</p>
+
+            <p>Empowerment means customers and advisors both have agency at the point of friction. For the shoe store owner, empowerment means she no longer has to live in fear that her business could be shut down overnight with no explanation. She has clear next steps and a sense of accountability. For advisors, empowerment means they are no longer passive facilitators of gibberish. They have the tools and authority to interpret complexity and guide decisions.</p>
+
+            <p>Trust follows when customers see that their effort leads to progress, and advisors see that their effort leads to impact. Without empowerment, both sides lose faith in the relationship.</p>
+
+            <div class="highlight-box">
+                <h3>Durable Business Value</h3>
+                <p>In our modeling, this translated into durable business value. The six-year roadmap projected <strong>$624M in cost savings and $31.5B in potential incremental ad revenue.</strong></p>
+                <p>Those gains were not the byproduct of efficiency alone, but the outcome of unlocking trust that drives growth. A trusted platform keeps small businesses investing through uncertainty. A trusted advisor keeps them connected even when policies are tough to swallow.</p>
+                <p><strong>Empowerment is not soft. It is the foundation of trust. And trust is the foundation of B2B revenue.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="border-top: 1px solid var(--border-color); padding-top: 3rem;">
+        <div class="container" style="text-align: center;">
+            <a href="index.html" class="back-link" style="font-size: 1rem;">← Back to All Work</a>
+        </div>
+    </section>
+
+</body>
+</html>
