@@ -274,6 +274,12 @@
             font-size: 2rem;
         }
 
+        /* Reduced padding for metrics section */
+        .section.metrics-section {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
         /* --- 6. THOUGHT LEADERSHIP --- */
         .thought-card {
             background: transparent;
@@ -356,6 +362,11 @@
             .metric-value { font-size: 2.5rem; }
             .metric-secondary .metric-value { font-size: 1.75rem; }
             .metrics-card { min-width: 240px; }
+            /* Proportional padding for metrics section on mobile */
+            .section.metrics-section {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
         }
     </style>
 </head>
@@ -443,7 +454,7 @@
         </div>
     </section>
 
-    <section class="section container">
+    <section class="section metrics-section container">
         <span class="label">Impact</span>
         <div class="metrics-container">
             <div class="metrics-grid" id="metricsGrid">
@@ -451,6 +462,11 @@
                     <span class="metric-value">$60M</span>
                     <p class="metric-label">Sales pipeline generated</p>
                     <!-- <p class="metric-subtitle">From AI-powered platform GTM initiatives</p> -->
+                </div>
+                <div class="metrics-card">
+                    <span class="metric-value">40%</span>
+                    <p class="metric-label">Reduction in costs</p>
+                    <!-- <p class="metric-subtitle">Operational efficiency gains</p> -->
                 </div>
                 <div class="metrics-card">
                     <span class="metric-value">$14M</span>
@@ -461,11 +477,6 @@
                     <span class="metric-value">22%</span>
                     <p class="metric-label">Reduction in support calls</p>
                     <!-- <p class="metric-subtitle">Self-service enablement</p> -->
-                </div>
-                <div class="metrics-card">
-                    <span class="metric-value">40%</span>
-                    <p class="metric-label">Reduction in costs</p>
-                    <!-- <p class="metric-subtitle">Operational efficiency gains</p> -->
                 </div>
                 <div class="metrics-card">
                     <span class="metric-value">26%</span>
