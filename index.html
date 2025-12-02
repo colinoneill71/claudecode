@@ -178,13 +178,34 @@
 
         /* --- 5. METRICS --- */
         .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
             gap: 3rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-green) var(--border-color);
+            padding-bottom: 1rem;
+        }
+        .metrics-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+        .metrics-grid::-webkit-scrollbar-track {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        .metrics-grid::-webkit-scrollbar-thumb {
+            background: var(--accent-green);
+            border-radius: 4px;
+        }
+        .metrics-grid::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-olive);
         }
         .metrics-card {
             text-align: center;
             padding: 2rem 1rem;
+            min-width: 280px;
+            flex-shrink: 0;
         }
         .metric-value {
             font-size: 3rem;
@@ -283,13 +304,14 @@
         /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
             h1 { font-size: 2.25rem; }
-            .grid-3, .metrics-grid, .work-card, .fit-grid, .footer-grid { grid-template-columns: 1fr; }
+            .grid-3, .work-card, .fit-grid, .footer-grid { grid-template-columns: 1fr; }
             .work-card { gap: 1.5rem; }
             header.container { margin-top: 4rem; }
             nav { padding: 1.5rem 2rem; }
             .container { padding: 0 2rem; }
             .metric-value { font-size: 2.5rem; }
             .metric-secondary .metric-value { font-size: 1.75rem; }
+            .metrics-card { min-width: 240px; }
         }
     </style>
 </head>
@@ -397,6 +419,14 @@
                     <span class="metric-value">40%</span>
                     <p class="metric-label">Reduction in costs</p>
                 </div>
+            </div>
+            <div class="metrics-card">
+                <span class="metric-value">26%</span>
+                <p class="metric-label">Increase in engagement</p>
+            </div>
+            <div class="metrics-card">
+                <span class="metric-value">30%</span>
+                <p class="metric-label">Increase in self-service interactions</p>
             </div>
         </div>
     </section>
