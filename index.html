@@ -176,7 +176,40 @@
             opacity: 1;
         }
 
-        /* --- 5. THOUGHT LEADERSHIP --- */
+        /* --- 5. METRICS --- */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+        .metrics-card {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--accent-green);
+            font-family: var(--font-family-heading);
+            display: block;
+            margin-bottom: 0.75rem;
+            line-height: 1;
+        }
+        .metric-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .metric-secondary {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .metric-secondary .metric-value {
+            font-size: 2rem;
+        }
+
+        /* --- 6. THOUGHT LEADERSHIP --- */
         .thought-card {
             background: transparent;
             border: none;
@@ -193,7 +226,7 @@
             line-height: 1.3;
         }
 
-        /* --- 6. RIGHT FIT --- */
+        /* --- 7. RIGHT FIT --- */
         .fit-section { background-color: #FFF3E6; } /* Soft warm peach */
         .fit-grid {
             display: grid;
@@ -211,7 +244,7 @@
             margin-left: -1em;
         }
 
-        /* --- 7. FOOTER --- */
+        /* --- 8. FOOTER --- */
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -250,11 +283,13 @@
         /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
             h1 { font-size: 2.25rem; }
-            .grid-3, .work-card, .fit-grid, .footer-grid { grid-template-columns: 1fr; }
+            .grid-3, .metrics-grid, .work-card, .fit-grid, .footer-grid { grid-template-columns: 1fr; }
             .work-card { gap: 1.5rem; }
             header.container { margin-top: 4rem; }
             nav { padding: 1.5rem 2rem; }
             .container { padding: 0 2rem; }
+            .metric-value { font-size: 2.5rem; }
+            .metric-secondary .metric-value { font-size: 1.75rem; }
         }
     </style>
 </head>
@@ -342,6 +377,30 @@
         </div>
     </section>
 
+    <section class="section container">
+        <span class="label">Impact</span>
+        <div class="metrics-grid">
+            <div class="metrics-card">
+                <span class="metric-value">$60M</span>
+                <p class="metric-label">Sales pipeline generated</p>
+            </div>
+            <div class="metrics-card">
+                <span class="metric-value">$14M</span>
+                <p class="metric-label">Web-attributed revenue</p>
+            </div>
+            <div class="metrics-card">
+                <div>
+                    <span class="metric-value">22%</span>
+                    <p class="metric-label">Reduction in support calls</p>
+                </div>
+                <div class="metric-secondary">
+                    <span class="metric-value">40%</span>
+                    <p class="metric-label">Reduction in costs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="leadership" class="section container">
         <span class="label">Leadership</span>
         <div class="grid-3">
@@ -415,7 +474,7 @@
             </div>
         </div>
         <div style="margin-top: 4rem; opacity: 0.5; font-size: 0.8rem;">
-            © 2024 Colin. All rights reserved.
+            © 2025 Colin O'Neill. All rights reserved.
         </div>
     </footer>
 
