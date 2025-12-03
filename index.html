@@ -644,9 +644,10 @@
                     const viewportHeight = window.innerHeight;
 
                     // Calculate scroll progress as section passes through viewport
-                    // Start when section bottom enters viewport, end when section top exits viewport
-                    const entryPoint = viewportHeight; // Section bottom at viewport bottom
-                    const exitPoint = -sectionHeight; // Section top at viewport top
+                    // Start when section top is at 60% of viewport (delayed start)
+                    // End when section top exits viewport
+                    const entryPoint = viewportHeight * 0.6; // Start later - when section is well into view
+                    const exitPoint = -sectionHeight * 0.5; // End slightly before section completely exits
                     const totalScrollDistance = entryPoint - exitPoint;
 
                     const currentPosition = rect.top;
