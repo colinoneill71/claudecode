@@ -240,6 +240,28 @@
             display: block;
         }
 
+        /* Section Divider Image - Wide banner between sections (1280x400) */
+        .image-section-divider {
+            width: 100%;
+            margin: 4rem 0;
+            background-color: var(--accent-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .image-section-divider img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 3.2 / 1; /* Maintains 1280x400 aspect ratio */
+        }
+
+        .image-section-divider .image-placeholder {
+            aspect-ratio: 3.2 / 1;
+            min-height: 250px;
+        }
+
         /* Image placeholder styling */
         .image-placeholder {
             background: linear-gradient(135deg, var(--accent-bg) 0%, #fff 100%);
@@ -381,6 +403,13 @@
             <p>[Details about research, workshops, prototyping, or validation approaches.]</p>
         </div>
 
+        <!-- Section Divider Image - Wide banner (1280x400) -->
+        <div class="image-section-divider">
+            <div class="image-placeholder">
+                [Section Divider Image: Wide banner image - 1280×400px]
+            </div>
+        </div>
+
         <!-- Two Column Image Grid -->
         <div class="container">
             <div class="image-grid-2">
@@ -459,6 +488,13 @@
         </div>
     </div>
 
+    <!-- Section Divider Image Example -->
+    <div class="image-section-divider">
+        <div class="image-placeholder">
+            [Section Divider Image: Process or timeline visualization - 1280×400px]
+        </div>
+    </div>
+
     <article class="container-narrow">
 
         <!-- Outcome Box -->
@@ -480,6 +516,28 @@
         </div>
 
     </article>
+
+    <!--
+    ========================================
+    SECTION DIVIDER IMAGE USAGE EXAMPLES
+    ========================================
+
+    To use section divider images (1280x400px), replace the placeholder with:
+
+    <div class="image-section-divider">
+        <img src="images/your-image.png" alt="Description of image">
+    </div>
+
+    Or with a caption:
+
+    <div class="image-section-divider">
+        <img src="images/your-image.png" alt="Description of image">
+    </div>
+    <p class="image-caption" style="text-align: center; margin-top: 0.5rem;">[Your caption text]</p>
+
+    Place these between content sections to create visual breaks.
+    Recommended size: 1280×400px PNG
+    -->
 
 </body>
 </html>
