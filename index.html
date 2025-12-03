@@ -595,10 +595,6 @@
 
         if (metricsGrid && scrollLeftBtn && scrollRightBtn) {
             const SCROLL_AMOUNT = 300;
-            const MANUAL_SCROLL_TIMEOUT = 800;
-
-            let isManualScroll = false;
-            let manualScrollTimeout;
 
             // Update button states
             function updateButtonStates() {
@@ -611,128 +607,30 @@
 
             // Button click handlers with smooth scrolling
             scrollLeftBtn.addEventListener('click', () => {
-                isManualScroll = true;
-                clearTimeout(manualScrollTimeout);
-
                 const targetScroll = Math.max(0, metricsGrid.scrollLeft - SCROLL_AMOUNT);
                 metricsGrid.scrollTo({
                     left: targetScroll,
                     behavior: 'smooth'
                 });
-
-                manualScrollTimeout = setTimeout(() => {
-                    isManualScroll = false;
-                }, MANUAL_SCROLL_TIMEOUT);
             });
 
             scrollRightBtn.addEventListener('click', () => {
-                isManualScroll = true;
-                clearTimeout(manualScrollTimeout);
-
                 const maxScroll = metricsGrid.scrollWidth - metricsGrid.clientWidth;
                 const targetScroll = Math.min(maxScroll, metricsGrid.scrollLeft + SCROLL_AMOUNT);
                 metricsGrid.scrollTo({
                     left: targetScroll,
                     behavior: 'smooth'
                 });
-
-                manualScrollTimeout = setTimeout(() => {
-                    isManualScroll = false;
-                }, MANUAL_SCROLL_TIMEOUT);
             });
 
-            // Track user scrolling
-            let userScrollTimeout;
-            metricsGrid.addEventListener('scroll', () => {
-                updateButtonStates();
-
-                // Mark as manual scroll if user is scrolling
-                isManualScroll = true;
-                clearTimeout(userScrollTimeout);
-                userScrollTimeout = setTimeout(() => {
-                    isManualScroll = false;
-                }, MANUAL_SCROLL_TIMEOUT);
-            }, { passive: true });
+            // Update button states on scroll
+            metricsGrid.addEventListener('scroll', updateButtonStates, { passive: true });
 
             // Update on resize
             window.addEventListener('resize', updateButtonStates, { passive: true });
 
             // Initial update
             updateButtonStates();
-
-            // Scroll-driven horizontal scroll (desktop only)
-            const isMobile = window.innerWidth <= 768;
-
-            if (!isMobile && metricsSection) {
-                let isIntersecting = false;
-                let animationFrameId = null;
-                let currentScrollPosition = 0;
-                let targetScrollPosition = 0;
-
-                // Detect when section is in viewport
-                const intersectionObserver = new IntersectionObserver(
-                    (entries) => {
-                        isIntersecting = entries[0].isIntersecting;
-
-                        // Start/stop animation based on visibility
-                        if (isIntersecting && !animationFrameId) {
-                            // Initialize current position when entering viewport
-                            currentScrollPosition = metricsGrid.scrollLeft;
-                            animationFrameId = requestAnimationFrame(handleScroll);
-                        } else if (!isIntersecting && animationFrameId) {
-                            cancelAnimationFrame(animationFrameId);
-                            animationFrameId = null;
-                        }
-                    },
-                    { threshold: [0, 0.1] }
-                );
-                intersectionObserver.observe(metricsSection);
-
-                function handleScroll() {
-                    if (!isManualScroll && isIntersecting) {
-                        const rect = metricsSection.getBoundingClientRect();
-                        const viewportHeight = window.innerHeight;
-                        const sectionHeight = metricsSection.offsetHeight;
-
-                        // Calculate scroll progress
-                        const entryPoint = viewportHeight * 0.6;
-                        const exitPoint = -sectionHeight * 0.5;
-                        const totalDistance = entryPoint - exitPoint;
-
-                        let progress = Math.max(0, Math.min(1,
-                            (entryPoint - rect.top) / totalDistance
-                        ));
-
-                        // Apply easing
-                        progress = 1 - Math.pow(1 - progress, 3);
-
-                        // Calculate target scroll position
-                        const maxScroll = metricsGrid.scrollWidth - metricsGrid.clientWidth;
-                        targetScrollPosition = progress * maxScroll;
-
-                        // Smooth interpolation (lerp) for buttery smooth animation
-                        // Higher lerp factor = faster following, lower = smoother
-                        const lerpFactor = 0.12;
-                        currentScrollPosition += (targetScrollPosition - currentScrollPosition) * lerpFactor;
-
-                        // Update horizontal scroll with interpolated position
-                        metricsGrid.scrollLeft = currentScrollPosition;
-                    } else if (isManualScroll && isIntersecting) {
-                        // Sync current position when user manually scrolls
-                        currentScrollPosition = metricsGrid.scrollLeft;
-                    }
-
-                    // Continue animation loop while section is visible
-                    if (isIntersecting) {
-                        animationFrameId = requestAnimationFrame(handleScroll);
-                    }
-                }
-
-                // Start animation if section is already visible
-                if (isIntersecting) {
-                    animationFrameId = requestAnimationFrame(handleScroll);
-                }
-            }
         }
     </script>
 
