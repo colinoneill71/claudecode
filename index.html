@@ -280,6 +280,35 @@
             padding-bottom: 4rem;
         }
 
+        /* Scroll-driven horizontal scroll */
+        .metrics-scroll-wrapper {
+            /* Creates a tall scroll zone - adjust multiplier to control scroll speed */
+            min-height: 200vh;
+            position: relative;
+        }
+
+        .metrics-sticky-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        /* Disable sticky behavior on mobile/tablet */
+        @media (max-width: 768px) {
+            .metrics-scroll-wrapper {
+                min-height: auto;
+            }
+
+            .metrics-sticky-container {
+                position: relative;
+                height: auto;
+            }
+        }
+
         /* --- 6. THOUGHT LEADERSHIP --- */
         .thought-card {
             background: transparent;
@@ -454,10 +483,12 @@
         </div>
     </section>
 
-    <section class="section metrics-section container">
-        <span class="label">Impact</span>
-        <div class="metrics-container">
-            <div class="metrics-grid" id="metricsGrid">
+    <section class="section metrics-section container" id="metricsSection">
+        <div class="metrics-scroll-wrapper">
+            <div class="metrics-sticky-container">
+                <span class="label">Impact</span>
+                <div class="metrics-container">
+                    <div class="metrics-grid" id="metricsGrid">
                 <div class="metrics-card">
                     <span class="metric-value">$60M</span>
                     <p class="metric-label">Sales pipeline generated</p>
@@ -492,6 +523,8 @@
             <div class="metrics-nav">
                 <button class="metrics-nav-arrow" id="scrollLeft" aria-label="Scroll left">←</button>
                 <button class="metrics-nav-arrow" id="scrollRight" aria-label="Scroll right">→</button>
+            </div>
+        </div>
             </div>
         </div>
     </section>
@@ -578,17 +611,30 @@
         const metricsGrid = document.getElementById('metricsGrid');
         const scrollLeftBtn = document.getElementById('scrollLeft');
         const scrollRightBtn = document.getElementById('scrollRight');
+        const metricsSection = document.getElementById('metricsSection');
 
         if (metricsGrid && scrollLeftBtn && scrollRightBtn) {
             // Scroll one card width at a time
             const scrollAmount = 300;
 
+            // Track if user is manually controlling scroll
+            let isManualScroll = false;
+            let manualScrollTimeout;
+
             scrollLeftBtn.addEventListener('click', () => {
+                isManualScroll = true;
+                clearTimeout(manualScrollTimeout);
                 metricsGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                // Reset after animation completes
+                manualScrollTimeout = setTimeout(() => { isManualScroll = false; }, 600);
             });
 
             scrollRightBtn.addEventListener('click', () => {
+                isManualScroll = true;
+                clearTimeout(manualScrollTimeout);
                 metricsGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                // Reset after animation completes
+                manualScrollTimeout = setTimeout(() => { isManualScroll = false; }, 600);
             });
 
             // Update button states based on scroll position
@@ -603,6 +649,50 @@
             metricsGrid.addEventListener('scroll', updateButtonStates);
             window.addEventListener('resize', updateButtonStates);
             updateButtonStates();
+
+            // Scroll-driven horizontal scroll (disabled on mobile)
+            const isMobile = window.innerWidth <= 768;
+
+            if (!isMobile && metricsSection) {
+                function handleScrollDrivenHorizontal() {
+                    // Don't interfere with manual scroll
+                    if (isManualScroll) return;
+
+                    const rect = metricsSection.getBoundingClientRect();
+                    const sectionHeight = metricsSection.offsetHeight;
+                    const viewportHeight = window.innerHeight;
+
+                    // Calculate scroll progress through the section
+                    // Progress starts when section enters viewport and ends when it leaves
+                    const scrollStart = -rect.top;
+                    const scrollEnd = sectionHeight - viewportHeight;
+                    const scrollProgress = Math.max(0, Math.min(1, scrollStart / scrollEnd));
+
+                    // Map to horizontal scroll
+                    const maxHorizontalScroll = metricsGrid.scrollWidth - metricsGrid.clientWidth;
+                    const targetScrollLeft = scrollProgress * maxHorizontalScroll;
+
+                    // Only update if section is in view
+                    if (rect.top <= 0 && rect.bottom >= viewportHeight) {
+                        metricsGrid.scrollLeft = targetScrollLeft;
+                    }
+                }
+
+                // Use requestAnimationFrame for smooth updates
+                let ticking = false;
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            handleScrollDrivenHorizontal();
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                });
+
+                // Initial call
+                handleScrollDrivenHorizontal();
+            }
         }
     </script>
 
