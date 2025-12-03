@@ -280,33 +280,14 @@
             padding-bottom: 4rem;
         }
 
-        /* Scroll-driven horizontal scroll */
+        /* Scroll-driven horizontal scroll wrapper */
         .metrics-scroll-wrapper {
-            /* Creates a tall scroll zone - adjust multiplier to control scroll speed */
-            min-height: 200vh;
             position: relative;
         }
 
         .metrics-sticky-container {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 2rem 0;
-        }
-
-        /* Disable sticky behavior on mobile/tablet */
-        @media (max-width: 768px) {
-            .metrics-scroll-wrapper {
-                min-height: auto;
-            }
-
-            .metrics-sticky-container {
-                position: relative;
-                height: auto;
-            }
+            /* Container for metrics content, no sticky positioning */
+            position: relative;
         }
 
         /* --- 6. THOUGHT LEADERSHIP --- */
@@ -662,20 +643,21 @@
                     const sectionHeight = metricsSection.offsetHeight;
                     const viewportHeight = window.innerHeight;
 
-                    // Calculate scroll progress through the section
-                    // Progress starts when section enters viewport and ends when it leaves
-                    const scrollStart = -rect.top;
-                    const scrollEnd = sectionHeight - viewportHeight;
-                    const scrollProgress = Math.max(0, Math.min(1, scrollStart / scrollEnd));
+                    // Calculate scroll progress as section passes through viewport
+                    // Start when section bottom enters viewport, end when section top exits viewport
+                    const entryPoint = viewportHeight; // Section bottom at viewport bottom
+                    const exitPoint = -sectionHeight; // Section top at viewport top
+                    const totalScrollDistance = entryPoint - exitPoint;
+
+                    const currentPosition = rect.top;
+                    const scrollProgress = Math.max(0, Math.min(1, (entryPoint - currentPosition) / totalScrollDistance));
 
                     // Map to horizontal scroll
                     const maxHorizontalScroll = metricsGrid.scrollWidth - metricsGrid.clientWidth;
                     const targetScrollLeft = scrollProgress * maxHorizontalScroll;
 
-                    // Only update if section is in view
-                    if (rect.top <= 0 && rect.bottom >= viewportHeight) {
-                        metricsGrid.scrollLeft = targetScrollLeft;
-                    }
+                    // Update horizontal scroll position
+                    metricsGrid.scrollLeft = targetScrollLeft;
                 }
 
                 // Use requestAnimationFrame for smooth updates
