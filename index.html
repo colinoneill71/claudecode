@@ -189,6 +189,8 @@
             scrollbar-width: thin;
             scrollbar-color: var(--accent-green) var(--border-color);
             padding-bottom: 1rem;
+            will-change: scroll-position;
+            contain: layout style paint;
         }
         .metrics-nav {
             display: flex;
@@ -588,90 +590,139 @@
     </footer>
 
     <script>
-        // Metrics scroll navigation
+        // Metrics scroll navigation - Optimized for performance
         const metricsGrid = document.getElementById('metricsGrid');
         const scrollLeftBtn = document.getElementById('scrollLeft');
         const scrollRightBtn = document.getElementById('scrollRight');
         const metricsSection = document.getElementById('metricsSection');
 
         if (metricsGrid && scrollLeftBtn && scrollRightBtn) {
-            // Scroll one card width at a time
-            const scrollAmount = 300;
+            // Configuration constants
+            const SCROLL_AMOUNT = 300;
+            const MANUAL_SCROLL_TIMEOUT = 600;
+            const BUTTON_UPDATE_DEBOUNCE = 100;
+            const SCROLL_ENTRY_POINT = 0.6; // 60% of viewport
+            const SCROLL_EXIT_POINT = 0.5; // 50% of section height
 
             // Track if user is manually controlling scroll
             let isManualScroll = false;
             let manualScrollTimeout;
 
+            // Cached dimensions (updated on resize)
+            let cachedDimensions = {
+                maxScroll: 0,
+                sectionHeight: 0,
+                viewportHeight: 0,
+                entryPoint: 0,
+                exitPoint: 0,
+                totalScrollDistance: 0
+            };
+
+            // Cache dimensions to avoid layout thrashing
+            function cacheDimensions() {
+                cachedDimensions.maxScroll = metricsGrid.scrollWidth - metricsGrid.clientWidth;
+                cachedDimensions.sectionHeight = metricsSection.offsetHeight;
+                cachedDimensions.viewportHeight = window.innerHeight;
+                cachedDimensions.entryPoint = cachedDimensions.viewportHeight * SCROLL_ENTRY_POINT;
+                cachedDimensions.exitPoint = -cachedDimensions.sectionHeight * SCROLL_EXIT_POINT;
+                cachedDimensions.totalScrollDistance = cachedDimensions.entryPoint - cachedDimensions.exitPoint;
+            }
+
+            // Debounced button state update
+            let buttonUpdateTimeout;
+            function updateButtonStates() {
+                clearTimeout(buttonUpdateTimeout);
+                buttonUpdateTimeout = setTimeout(() => {
+                    // Batch read
+                    const scrollLeft = metricsGrid.scrollLeft;
+                    const maxScroll = cachedDimensions.maxScroll;
+
+                    // Batch write
+                    scrollLeftBtn.disabled = scrollLeft <= 0;
+                    scrollRightBtn.disabled = scrollLeft >= maxScroll - 1;
+                }, BUTTON_UPDATE_DEBOUNCE);
+            }
+
+            // Manual scroll handlers
             scrollLeftBtn.addEventListener('click', () => {
                 isManualScroll = true;
                 clearTimeout(manualScrollTimeout);
-                metricsGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-                // Reset after animation completes
-                manualScrollTimeout = setTimeout(() => { isManualScroll = false; }, 600);
+                metricsGrid.scrollBy({ left: -SCROLL_AMOUNT, behavior: 'smooth' });
+                manualScrollTimeout = setTimeout(() => { isManualScroll = false; }, MANUAL_SCROLL_TIMEOUT);
             });
 
             scrollRightBtn.addEventListener('click', () => {
                 isManualScroll = true;
                 clearTimeout(manualScrollTimeout);
-                metricsGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                // Reset after animation completes
-                manualScrollTimeout = setTimeout(() => { isManualScroll = false; }, 600);
+                metricsGrid.scrollBy({ left: SCROLL_AMOUNT, behavior: 'smooth' });
+                manualScrollTimeout = setTimeout(() => { isManualScroll = false; }, MANUAL_SCROLL_TIMEOUT);
             });
 
-            // Update button states based on scroll position
-            function updateButtonStates() {
-                const scrollLeft = metricsGrid.scrollLeft;
-                const maxScroll = metricsGrid.scrollWidth - metricsGrid.clientWidth;
+            // Add passive event listeners for better scroll performance
+            metricsGrid.addEventListener('scroll', updateButtonStates, { passive: true });
 
-                scrollLeftBtn.disabled = scrollLeft <= 0;
-                scrollRightBtn.disabled = scrollLeft >= maxScroll - 1;
-            }
+            // Resize observer for dimension caching
+            const resizeObserver = new ResizeObserver(() => {
+                cacheDimensions();
+                updateButtonStates();
+            });
+            resizeObserver.observe(metricsGrid);
+            resizeObserver.observe(metricsSection);
 
-            metricsGrid.addEventListener('scroll', updateButtonStates);
-            window.addEventListener('resize', updateButtonStates);
+            // Initial cache and button state
+            cacheDimensions();
             updateButtonStates();
 
             // Scroll-driven horizontal scroll (disabled on mobile)
             const isMobile = window.innerWidth <= 768;
 
             if (!isMobile && metricsSection) {
+                // IntersectionObserver to detect when section is in view
+                let isIntersecting = false;
+                const intersectionObserver = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach(entry => {
+                            isIntersecting = entry.isIntersecting;
+                        });
+                    },
+                    { threshold: [0, 0.1, 0.5, 1.0] }
+                );
+                intersectionObserver.observe(metricsSection);
+
                 function handleScrollDrivenHorizontal() {
-                    // Don't interfere with manual scroll
-                    if (isManualScroll) return;
+                    // Skip if manual scroll or not in view
+                    if (isManualScroll || !isIntersecting) return;
 
+                    // Single DOM read - getBoundingClientRect
                     const rect = metricsSection.getBoundingClientRect();
-                    const sectionHeight = metricsSection.offsetHeight;
-                    const viewportHeight = window.innerHeight;
-
-                    // Calculate scroll progress as section passes through viewport
-                    // Start when section top is at 60% of viewport (delayed start)
-                    // End when section top exits viewport
-                    const entryPoint = viewportHeight * 0.6; // Start later - when section is well into view
-                    const exitPoint = -sectionHeight * 0.5; // End slightly before section completely exits
-                    const totalScrollDistance = entryPoint - exitPoint;
-
                     const currentPosition = rect.top;
-                    const scrollProgress = Math.max(0, Math.min(1, (entryPoint - currentPosition) / totalScrollDistance));
 
-                    // Map to horizontal scroll
-                    const maxHorizontalScroll = metricsGrid.scrollWidth - metricsGrid.clientWidth;
-                    const targetScrollLeft = scrollProgress * maxHorizontalScroll;
+                    // Calculate scroll progress using cached values
+                    const scrollProgress = Math.max(0, Math.min(1,
+                        (cachedDimensions.entryPoint - currentPosition) / cachedDimensions.totalScrollDistance
+                    ));
 
-                    // Update horizontal scroll position
-                    metricsGrid.scrollLeft = targetScrollLeft;
+                    // Calculate target scroll position
+                    const targetScrollLeft = scrollProgress * cachedDimensions.maxScroll;
+
+                    // Single DOM write - only if changed significantly
+                    const currentScrollLeft = metricsGrid.scrollLeft;
+                    if (Math.abs(targetScrollLeft - currentScrollLeft) > 1) {
+                        metricsGrid.scrollLeft = targetScrollLeft;
+                    }
                 }
 
-                // Use requestAnimationFrame for smooth updates
+                // Optimized scroll handler with requestAnimationFrame
                 let ticking = false;
                 window.addEventListener('scroll', () => {
                     if (!ticking) {
+                        ticking = true;
                         window.requestAnimationFrame(() => {
                             handleScrollDrivenHorizontal();
                             ticking = false;
                         });
-                        ticking = true;
                     }
-                });
+                }, { passive: true });
 
                 // Initial call
                 handleScrollDrivenHorizontal();
