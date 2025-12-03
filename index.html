@@ -184,13 +184,10 @@
             display: flex;
             gap: 3rem;
             overflow-x: auto;
-            scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: thin;
             scrollbar-color: var(--accent-green) var(--border-color);
             padding-bottom: 1rem;
-            will-change: scroll-position;
-            contain: layout style paint;
         }
         .metrics-nav {
             display: flex;
@@ -590,83 +587,38 @@
     </footer>
 
     <script>
-        // Metrics scroll navigation - Optimized for performance
+        // Metrics scroll navigation
         const metricsGrid = document.getElementById('metricsGrid');
         const scrollLeftBtn = document.getElementById('scrollLeft');
         const scrollRightBtn = document.getElementById('scrollRight');
         const metricsSection = document.getElementById('metricsSection');
 
         if (metricsGrid && scrollLeftBtn && scrollRightBtn) {
-            // Configuration constants
             const SCROLL_AMOUNT = 300;
-            const MANUAL_SCROLL_TIMEOUT = 600;
-            const BUTTON_UPDATE_DEBOUNCE = 100;
-            const SCROLL_ENTRY_POINT = 0.6; // 60% of viewport
-            const SCROLL_EXIT_POINT = 0.5; // 50% of section height
-            const LERP_FACTOR = 0.1; // Smoothing factor (0.05-0.15 recommended)
-            const SCROLL_THRESHOLD = 0.5; // Minimum scroll distance to trigger update
+            const MANUAL_SCROLL_TIMEOUT = 800;
 
-            // Track if user is manually controlling scroll
             let isManualScroll = false;
             let manualScrollTimeout;
-            let currentScrollPosition = 0; // Track current interpolated position
-            let targetScrollPosition = 0; // Track target position
 
-            // Cached dimensions (updated on resize)
-            let cachedDimensions = {
-                maxScroll: 0,
-                sectionHeight: 0,
-                viewportHeight: 0,
-                entryPoint: 0,
-                exitPoint: 0,
-                totalScrollDistance: 0
-            };
-
-            // Easing function for smooth deceleration
-            function easeOutCubic(t) {
-                return 1 - Math.pow(1 - t, 3);
-            }
-
-            // Linear interpolation for smooth transitions
-            function lerp(start, end, factor) {
-                return start + (end - start) * factor;
-            }
-
-            // Cache dimensions to avoid layout thrashing
-            function cacheDimensions() {
-                cachedDimensions.maxScroll = metricsGrid.scrollWidth - metricsGrid.clientWidth;
-                cachedDimensions.sectionHeight = metricsSection.offsetHeight;
-                cachedDimensions.viewportHeight = window.innerHeight;
-                cachedDimensions.entryPoint = cachedDimensions.viewportHeight * SCROLL_ENTRY_POINT;
-                cachedDimensions.exitPoint = -cachedDimensions.sectionHeight * SCROLL_EXIT_POINT;
-                cachedDimensions.totalScrollDistance = cachedDimensions.entryPoint - cachedDimensions.exitPoint;
-
-                // Initialize current scroll position
-                currentScrollPosition = metricsGrid.scrollLeft;
-            }
-
-            // Debounced button state update
-            let buttonUpdateTimeout;
+            // Update button states
             function updateButtonStates() {
-                clearTimeout(buttonUpdateTimeout);
-                buttonUpdateTimeout = setTimeout(() => {
-                    // Batch read
-                    const scrollLeft = metricsGrid.scrollLeft;
-                    const maxScroll = cachedDimensions.maxScroll;
+                const scrollLeft = metricsGrid.scrollLeft;
+                const maxScroll = metricsGrid.scrollWidth - metricsGrid.clientWidth;
 
-                    // Batch write
-                    scrollLeftBtn.disabled = scrollLeft <= 0;
-                    scrollRightBtn.disabled = scrollLeft >= maxScroll - 1;
-                }, BUTTON_UPDATE_DEBOUNCE);
+                scrollLeftBtn.disabled = scrollLeft <= 0;
+                scrollRightBtn.disabled = scrollLeft >= maxScroll - 1;
             }
 
-            // Manual scroll handlers
+            // Button click handlers with smooth scrolling
             scrollLeftBtn.addEventListener('click', () => {
                 isManualScroll = true;
                 clearTimeout(manualScrollTimeout);
 
-                // Update target for smooth interpolation
-                targetScrollPosition = Math.max(0, currentScrollPosition - SCROLL_AMOUNT);
+                const targetScroll = Math.max(0, metricsGrid.scrollLeft - SCROLL_AMOUNT);
+                metricsGrid.scrollTo({
+                    left: targetScroll,
+                    behavior: 'smooth'
+                });
 
                 manualScrollTimeout = setTimeout(() => {
                     isManualScroll = false;
@@ -677,123 +629,94 @@
                 isManualScroll = true;
                 clearTimeout(manualScrollTimeout);
 
-                // Update target for smooth interpolation
-                targetScrollPosition = Math.min(
-                    cachedDimensions.maxScroll,
-                    currentScrollPosition + SCROLL_AMOUNT
-                );
+                const maxScroll = metricsGrid.scrollWidth - metricsGrid.clientWidth;
+                const targetScroll = Math.min(maxScroll, metricsGrid.scrollLeft + SCROLL_AMOUNT);
+                metricsGrid.scrollTo({
+                    left: targetScroll,
+                    behavior: 'smooth'
+                });
 
                 manualScrollTimeout = setTimeout(() => {
                     isManualScroll = false;
                 }, MANUAL_SCROLL_TIMEOUT);
             });
 
-            // Track user-initiated scrolling on the metrics grid itself
+            // Track user scrolling
             let userScrollTimeout;
             metricsGrid.addEventListener('scroll', () => {
-                // Detect if this is user-initiated (not from our animation)
-                const scrollDiff = Math.abs(metricsGrid.scrollLeft - currentScrollPosition);
-                if (scrollDiff > 2) {
-                    isManualScroll = true;
-                    clearTimeout(userScrollTimeout);
-                    userScrollTimeout = setTimeout(() => {
-                        isManualScroll = false;
-                    }, MANUAL_SCROLL_TIMEOUT);
-                }
-
                 updateButtonStates();
+
+                // Mark as manual scroll if user is scrolling
+                isManualScroll = true;
+                clearTimeout(userScrollTimeout);
+                userScrollTimeout = setTimeout(() => {
+                    isManualScroll = false;
+                }, MANUAL_SCROLL_TIMEOUT);
             }, { passive: true });
 
-            // Resize observer for dimension caching
-            const resizeObserver = new ResizeObserver(() => {
-                cacheDimensions();
-                updateButtonStates();
-            });
-            resizeObserver.observe(metricsGrid);
-            resizeObserver.observe(metricsSection);
+            // Update on resize
+            window.addEventListener('resize', updateButtonStates, { passive: true });
 
-            // Initial cache and button state
-            cacheDimensions();
+            // Initial update
             updateButtonStates();
 
-            // Scroll-driven horizontal scroll (disabled on mobile)
+            // Scroll-driven horizontal scroll (desktop only)
             const isMobile = window.innerWidth <= 768;
 
             if (!isMobile && metricsSection) {
-                // IntersectionObserver to detect when section is in view
                 let isIntersecting = false;
+                let animationFrameId = null;
+
+                // Detect when section is in viewport
                 const intersectionObserver = new IntersectionObserver(
                     (entries) => {
-                        entries.forEach(entry => {
-                            isIntersecting = entry.isIntersecting;
-                        });
+                        isIntersecting = entries[0].isIntersecting;
+
+                        // Start/stop animation based on visibility
+                        if (isIntersecting && !animationFrameId) {
+                            animationFrameId = requestAnimationFrame(handleScroll);
+                        } else if (!isIntersecting && animationFrameId) {
+                            cancelAnimationFrame(animationFrameId);
+                            animationFrameId = null;
+                        }
                     },
-                    { threshold: [0, 0.1, 0.5, 1.0] }
+                    { threshold: [0, 0.1] }
                 );
                 intersectionObserver.observe(metricsSection);
 
-                function handleScrollDrivenHorizontal() {
-                    // Skip if manual scroll or not in view
-                    if (isManualScroll || !isIntersecting) return;
+                function handleScroll() {
+                    if (!isManualScroll && isIntersecting) {
+                        const rect = metricsSection.getBoundingClientRect();
+                        const viewportHeight = window.innerHeight;
+                        const sectionHeight = metricsSection.offsetHeight;
 
-                    // Single DOM read - getBoundingClientRect
-                    const rect = metricsSection.getBoundingClientRect();
-                    const currentPosition = rect.top;
+                        // Calculate scroll progress
+                        const entryPoint = viewportHeight * 0.6;
+                        const exitPoint = -sectionHeight * 0.5;
+                        const totalDistance = entryPoint - exitPoint;
 
-                    // Calculate scroll progress using cached values
-                    let scrollProgress = Math.max(0, Math.min(1,
-                        (cachedDimensions.entryPoint - currentPosition) / cachedDimensions.totalScrollDistance
-                    ));
+                        let progress = Math.max(0, Math.min(1,
+                            (entryPoint - rect.top) / totalDistance
+                        ));
 
-                    // Apply easing for smoother feel
-                    scrollProgress = easeOutCubic(scrollProgress);
+                        // Apply easing
+                        progress = 1 - Math.pow(1 - progress, 3);
 
-                    // Update target scroll position
-                    targetScrollPosition = scrollProgress * cachedDimensions.maxScroll;
-                }
-
-                // Continuous animation loop for smooth interpolation
-                function animateScroll() {
-                    // Always interpolate towards target
-                    currentScrollPosition = lerp(currentScrollPosition, targetScrollPosition, LERP_FACTOR);
-
-                    // Only update DOM if the change is significant
-                    const scrollDifference = Math.abs(currentScrollPosition - metricsGrid.scrollLeft);
-                    if (scrollDifference > SCROLL_THRESHOLD && !isManualScroll) {
-                        metricsGrid.scrollLeft = currentScrollPosition;
-                    } else if (isManualScroll) {
-                        // When manually scrolling, keep target in sync unless button was clicked
-                        const buttonClickedRecently = Math.abs(targetScrollPosition - metricsGrid.scrollLeft) > SCROLL_AMOUNT * 0.5;
-                        if (!buttonClickedRecently) {
-                            targetScrollPosition = metricsGrid.scrollLeft;
-                            currentScrollPosition = metricsGrid.scrollLeft;
-                        } else {
-                            // Button was clicked, continue interpolation
-                            metricsGrid.scrollLeft = currentScrollPosition;
-                        }
+                        // Update horizontal scroll
+                        const maxScroll = metricsGrid.scrollWidth - metricsGrid.clientWidth;
+                        metricsGrid.scrollLeft = progress * maxScroll;
                     }
 
-                    // Continue animation loop
-                    requestAnimationFrame(animateScroll);
+                    // Continue animation loop while section is visible
+                    if (isIntersecting) {
+                        animationFrameId = requestAnimationFrame(handleScroll);
+                    }
                 }
 
-                // Optimized scroll handler with requestAnimationFrame
-                let ticking = false;
-                window.addEventListener('scroll', () => {
-                    if (!ticking) {
-                        ticking = true;
-                        window.requestAnimationFrame(() => {
-                            handleScrollDrivenHorizontal();
-                            ticking = false;
-                        });
-                    }
-                }, { passive: true });
-
-                // Start continuous animation loop
-                animateScroll();
-
-                // Initial call
-                handleScrollDrivenHorizontal();
+                // Start animation if section is already visible
+                if (isIntersecting) {
+                    animationFrameId = requestAnimationFrame(handleScroll);
+                }
             }
         }
     </script>
