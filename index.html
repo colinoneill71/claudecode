@@ -611,6 +611,7 @@
             let manualScrollTimeout;
             let currentScrollPosition = 0; // Track current interpolated position
             let targetScrollPosition = 0; // Track target position
+            let isProgrammaticScroll = false; // Flag to prevent scroll event conflicts in Chrome
 
             // Cached dimensions (updated on resize)
             let cachedDimensions = {
@@ -691,6 +692,12 @@
             // Track user-initiated scrolling on the metrics grid itself
             let userScrollTimeout;
             metricsGrid.addEventListener('scroll', () => {
+                // Ignore scroll events triggered by our own animation (Chrome compatibility)
+                if (isProgrammaticScroll) {
+                    updateButtonStates();
+                    return;
+                }
+
                 // Detect if this is user-initiated (not from our animation)
                 const scrollDiff = Math.abs(metricsGrid.scrollLeft - currentScrollPosition);
                 if (scrollDiff > 2) {
@@ -760,7 +767,10 @@
                     // Only update DOM if the change is significant
                     const scrollDifference = Math.abs(currentScrollPosition - metricsGrid.scrollLeft);
                     if (scrollDifference > SCROLL_THRESHOLD && !isManualScroll) {
+                        isProgrammaticScroll = true;
                         metricsGrid.scrollLeft = currentScrollPosition;
+                        // Reset flag after a microtask to allow scroll event to process
+                        Promise.resolve().then(() => { isProgrammaticScroll = false; });
                     } else if (isManualScroll) {
                         // When manually scrolling, keep target in sync unless button was clicked
                         const buttonClickedRecently = Math.abs(targetScrollPosition - metricsGrid.scrollLeft) > SCROLL_AMOUNT * 0.5;
@@ -769,7 +779,9 @@
                             currentScrollPosition = metricsGrid.scrollLeft;
                         } else {
                             // Button was clicked, continue interpolation
+                            isProgrammaticScroll = true;
                             metricsGrid.scrollLeft = currentScrollPosition;
+                            Promise.resolve().then(() => { isProgrammaticScroll = false; });
                         }
                     }
 
