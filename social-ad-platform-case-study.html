@@ -169,6 +169,22 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
+        /* Section Divider Image - Full width banner */
+        .image-section-divider {
+            width: 100%;
+            margin: 4rem 0;
+            background-color: var(--accent-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .image-section-divider img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
         /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
@@ -213,9 +229,13 @@
         <div class="container content-section">
             <h2>When Revenue Is Blocked, Livelihoods Are Blocked</h2>
             <p>Small businesses built their livelihoods on our client's platform. Every ad dollar mattered. But when something went wrong, they were trapped in a maze of long wait times, opaque algorithm decisions and support agents with no real answers. Cases dragged on. Campaigns sat idle. For our client's customers that's not a tech support issue, its lost revenue and missed payroll.</p>
+        </div>
 
-            <img src="images/F4_1.png" alt="Social ad platform case study illustration" class="section-image">
+        <div class="image-section-divider">
+            <img src="images/F4_1.png" alt="Social ad platform case study illustration">
+        </div>
 
+        <div class="container content-section">
             <p>One small business owner we interviewed, an MBA grad. running a small shoe company, put it bluntly: "When my account is blocked, my revenue is blocked." She was tech-savvy, data-driven and could run circles around most marketers in understanding performance metrics. But when her ads were blocked, she found herself staring at vague error messages and listening to advisors read lines they did not understand. Her talent and effort were not the problem. The system was.</p>
 
             <p>For her, every day a campaign sat inactive was not an inconvenience. It was inventory that did not move and a payroll deadline creeping closer with no relief in sight.</p>
