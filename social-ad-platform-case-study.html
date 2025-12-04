@@ -367,6 +367,26 @@
             .case-study-header { padding: 4rem 0 3rem; }
             .case-study-content { padding: 3rem 0; }
 
+            /* Header h1 improvements */
+            .case-study-header h1 {
+                max-width: 100%;
+            }
+            .case-study-header h1 br {
+                display: none; /* Remove forced line breaks on mobile */
+            }
+            .case-study-header h1 .accent {
+                display: block;
+                margin-top: 0.5rem;
+                font-size: 0.95em;
+            }
+
+            /* Label sizing */
+            .label {
+                font-size: 0.7rem;
+                letter-spacing: 0.08em;
+                margin-bottom: 1rem;
+            }
+
             /* Meta information */
             .case-study-meta {
                 gap: 2rem 1.5rem;
@@ -377,6 +397,7 @@
             }
             .meta-value {
                 font-size: 0.9rem;
+                line-height: 1.4;
             }
 
             /* Stats grid */
@@ -447,9 +468,22 @@
             h3 { font-size: 1.125rem; }
 
             .container, .wide-container { padding: 0 1.25rem; }
-            .case-study-header { padding: 3rem 0 2.5rem; }
+            .case-study-header { padding: 2.5rem 0 2rem; }
             .stat-number { font-size: 2.25rem; }
             .quote-callout p { font-size: 1rem; }
+
+            /* Header optimizations for small screens */
+            .case-study-meta {
+                gap: 1.5rem 1rem;
+                margin-top: 1.5rem;
+            }
+            .meta-item {
+                gap: 0.375rem;
+            }
+            .meta-value {
+                font-size: 0.85rem;
+                word-break: break-word;
+            }
 
             .hero-image {
                 margin: 0 -1.25rem;
