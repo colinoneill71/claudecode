@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empowering a Life in Motion | Colin O'Neill</title>
+
+    <!-- Password Protection -->
+    <link rel="stylesheet" href="password-protection.css">
+
+    <style>
+        /* --- GLOBAL VARIABLES & RESET --- */
+        :root {
+            --bg-color: #FFF9F0;
+            --text-main: #2a2420;
+            --text-secondary: #5a4f47;
+            --accent-green: #D4856A;
+            --accent-olive: #C99A6E;
+            --accent-bg: #FFF3E6;
+            --border-color: #F0E4D7;
+            --spacing-unit: 1rem;
+            --container-width: 1200px;
+            --font-family-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-family-heading: 'Georgia', 'Times New Roman', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-family-heading);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+        }
+
+        h1 { font-size: 3.5rem; margin-bottom: 2rem; font-weight: 500; line-height: 1.1; }
+        h2 { font-size: 2rem; color: var(--text-main); font-weight: 500; margin-top: 4rem; margin-bottom: 1.5rem; }
+        h3 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; font-weight: 500; }
+        h4 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: 0.75rem; font-weight: 600; }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            max-width: 750px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        a:hover { opacity: 0.7; }
+
+        .accent { color: var(--accent-green); }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .wide-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .label {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        nav .logo {
+            font-family: var(--font-family-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
+        nav .back-link {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: text-decoration-color 0.2s;
+        }
+        nav .back-link:hover {
+            text-decoration-color: var(--text-secondary);
+            opacity: 1;
+        }
+
+        /* --- CASE STUDY HEADER --- */
+        .case-study-header {
+            padding: 6rem 0 4rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .case-study-header h1 {
+            max-width: 900px;
+        }
+
+        .case-study-meta {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .meta-label {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .meta-value {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* --- CASE STUDY CONTENT --- */
+        .case-study-content {
+            padding: 5rem 0;
+        }
+
+        /* --- QUOTE CALLOUT --- */
+        .quote-callout {
+            margin: 3rem 0;
+            padding: 2.5rem 2rem 2.5rem 3rem;
+            background-color: var(--accent-bg);
+            border-left: 4px solid var(--accent-green);
+            max-width: 100%;
+        }
+
+        .quote-callout p {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            max-width: 100%;
+        }
+
+        .quote-attribution {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* --- STATS HIGHLIGHT --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-family-heading);
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--accent-green);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* --- STRATEGY LIST --- */
+        .strategy-list {
+            list-style: none;
+            margin: 2rem 0;
+            padding: 0;
+        }
+
+        .strategy-list li {
+            margin-bottom: 2.5rem;
+            padding-left: 2.5rem;
+            position: relative;
+        }
+
+        .strategy-list li::before {
+            content: "•";
+            color: var(--accent-green);
+            font-size: 2rem;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: -0.3rem;
+        }
+
+        .strategy-list strong {
+            display: block;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            font-family: var(--font-family-heading);
+        }
+
+        .strategy-list p {
+            margin-bottom: 0;
+        }
+
+        /* --- INSIGHT BOX --- */
+        .insight-box {
+            background-color: #FAF6F1;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border-radius: 2px;
+            max-width: 100%;
+        }
+
+        .insight-box h4 {
+            margin-top: 0;
+            color: var(--text-main);
+        }
+
+        .insight-box p {
+            max-width: 100%;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-cta {
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.9rem 1.8rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-radius: 2px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--text-main);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-green);
+            opacity: 1;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--text-main);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--text-main);
+            color: #fff;
+            opacity: 1;
+        }
+
+        /* --- HERO IMAGE --- */
+        .hero-image {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.25rem; }
+            h2 { font-size: 1.5rem; }
+            .container, .wide-container { padding: 0 2rem; }
+            nav { padding: 1.5rem 2rem; }
+            .case-study-header { padding: 4rem 0 3rem; }
+            .case-study-content { padding: 3rem 0; }
+            .stats-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .quote-callout { padding: 2rem 1.5rem; margin: 2rem -1rem; }
+            .quote-callout p { font-size: 1.1rem; }
+            .stat-number { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Colin O'Neill</div>
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+    </nav>
+
+    <header class="case-study-header container">
+        <span class="label">Case Study</span>
+        <h1>Empowering a Life in Motion:<br><span class="accent">Unifying Experience Through Journey Design</span></h1>
+
+        <div class="case-study-meta">
+            <div class="meta-item">
+                <span class="meta-label">Client</span>
+                <span class="meta-value">Major Membership Organization</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Role</span>
+                <span class="meta-label">Strategic Journey Program Lead</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Focus</span>
+                <span class="meta-value">UX, Content, Benefits, Digital Services</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Impact</span>
+                <span class="meta-value">26% increase in engagement, 168 personalized experiences</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero-image">
+        <img src="images/placeholder-hero.jpg" alt="Empowering a Life in Motion Case Study Hero Image">
+    </div>
+
+    <article class="case-study-content container">
+
+        <p>Members of this major organization weren't looking for more features. They were looking for relevance. Despite offering valuable benefits, robust digital services, and extensive content, the organization struggled with fragmentation. Each team operated independently, creating features without consideration for the broader member journey. The result: overwhelmed members who couldn't find what mattered to them, and declining engagement with programs that should have been driving value.</p>
+
+        <p>The challenge wasn't building more. It was creating coherence from what already existed and designing experiences that adapt to each member's unique life stage, activities, and goals.</p>
+
+        <h2>The Challenge: Fragmentation Hiding Value</h2>
+
+        <p>The organization had invested heavily in digital capabilities—mobile apps, web platforms, benefit programs, content libraries. But these investments operated in silos. UX teams designed interfaces without coordination with content strategy. Benefits programs launched without integration into digital touchpoints. Features accumulated without a unifying vision of member journeys.</p>
+
+        <div class="insight-box">
+            <h4>What members experienced:</h4>
+            <p>A navigation structure that reflected internal org charts rather than their needs. Benefits they qualified for but never discovered. Content buried in separate properties they didn't know existed. Apps that duplicated features without talking to each other. Every interaction required them to understand the organization's structure rather than the organization understanding their lives.</p>
+        </div>
+
+        <h2>The Approach: Journey-Led Transformation</h2>
+
+        <p>Rather than adding more features, we led a strategic journey program to unify the fragmented experience. The goal was creating coherence: connecting UX, content, benefits, and digital services around the journeys that actually mattered to members' lives.</p>
+
+        <ul class="strategy-list">
+            <li>
+                <strong>Foundational Design System</strong>
+                <p>We implemented a design system that created visual and experiential consistency across all digital properties. But more importantly, it established patterns for how features and services integrate into journeys rather than existing as standalone tools. The system became the connective tissue that made siloed programs feel like one coherent membership.</p>
+            </li>
+            <li>
+                <strong>Journey-Oriented Service Integration</strong>
+                <p>We mapped key member journeys and reorganized features, content, and benefits around those experiences. Planning a trip? The journey brought together insurance benefits, travel content, location-based offers, and booking tools in one integrated flow. Pursuing wellness goals? The journey connected activity tracking, rewards programs, educational content, and community features as one experience.</p>
+            </li>
+            <li>
+                <strong>Personalization Platform Architecture</strong>
+                <p>We defined a personalization architecture with 12 user states and 14 activity metrics, enabling 168 unique personalized experiences across all digital properties. This wasn't personalization for its own sake—it was ensuring that every member saw what mattered most to them, when it mattered most, without having to hunt for it.</p>
+            </li>
+            <li>
+                <strong>Mobile App Suite Activation</strong>
+                <p>We activated previously siloed programs as a unified suite of mobile apps, each focused on specific journey moments while sharing common design patterns, data, and member context. Apps that used to compete for attention now worked together to support members throughout their journeys.</p>
+            </li>
+        </ul>
+
+        <h2>Why It Matters: Coherence Drives Engagement</h2>
+
+        <p>The transformation wasn't about technology. It was about respecting members' time and intelligence by organizing services around their lives rather than the organization's structure.</p>
+
+        <div class="quote-callout">
+            <p>Members don't want to learn your org chart. They want you to understand their lives and make it easy to get value from their membership.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">26%</span>
+                <span class="stat-label">Increase in members earning rewards for primary activities</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">168</span>
+                <span class="stat-label">Unique personalized experiences across digital properties</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">Unified</span>
+                <span class="stat-label">Previously siloed teams and touchpoints</span>
+            </div>
+        </div>
+
+        <p>The work delivered measurable engagement impact—a 26% increase in members earning rewards points for primary activities. But the broader outcome was creating a roadmap and operating model that aligned previously siloed teams around member journeys rather than internal projects.</p>
+
+        <p>The personalization platform architecture became the foundation for future innovation, enabling the organization to continue evolving experiences without recreating fragmentation. When teams share common journey understanding and technical patterns, new capabilities reinforce coherence rather than adding complexity.</p>
+
+    </article>
+
+    <footer class="container">
+        <h3>Interested in this work?</h3>
+        <p>Let's discuss how journey-led transformation can unify fragmented experiences into coherent member value.</p>
+        <div class="footer-cta">
+            <a href="index.html#contact" class="btn btn-primary">Get in Touch</a>
+            <a href="index.html#work" class="btn btn-secondary">View More Work</a>
+        </div>
+    </footer>
+
+    <!-- Password Protection Script -->
+    <script src="password-protection.js"></script>
+
+</body>
+</html>
