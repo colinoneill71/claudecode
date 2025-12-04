@@ -188,6 +188,8 @@
             scrollbar-width: thin;
             scrollbar-color: var(--accent-green) var(--border-color);
             padding-bottom: 1rem;
+            scroll-snap-type: x mandatory;
+            scroll-padding: 0 calc(50% - 140px);
         }
         .metrics-nav {
             display: flex;
@@ -242,6 +244,7 @@
             padding: 2rem 1rem;
             min-width: 280px;
             flex-shrink: 0;
+            scroll-snap-align: center;
         }
         .metric-value {
             font-size: 3rem;
@@ -295,6 +298,7 @@
             border: none;
             padding: 0;
             transition: opacity 0.2s;
+            display: block;
         }
         .thought-card:hover { opacity: 0.7; }
         .thought-title {
@@ -304,6 +308,16 @@
             display: block;
             font-family: var(--font-family-heading);
             line-height: 1.3;
+            color: var(--text-main);
+        }
+        .thought-link-label {
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-green);
+            text-decoration: underline;
+            text-decoration-color: var(--accent-green);
         }
 
         /* --- 7. RIGHT FIT --- */
@@ -360,21 +374,88 @@
             opacity: 1;
         }
 
+        /* Hamburger menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1000;
+        }
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background-color: var(--text-main);
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
         /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
             h1 { font-size: 2.25rem; }
             .grid-3, .work-card, .fit-grid, .footer-grid { grid-template-columns: 1fr; }
             .work-card { gap: 1.5rem; }
             header.container { margin-top: 4rem; }
-            nav { padding: 1.5rem 2rem; }
             .container { padding: 0 2rem; }
             .metric-value { font-size: 2.5rem; }
             .metric-secondary .metric-value { font-size: 1.75rem; }
             .metrics-card { min-width: 240px; }
-            /* Proportional padding for metrics section on mobile */
+            /* Center metrics in viewport on mobile */
+            .metrics-grid {
+                padding-left: calc(50vw - 120px);
+                padding-right: calc(50vw - 120px);
+                scroll-padding: 0 calc(50vw - 120px);
+            }
+            /* Reduce section spacing on mobile for better vertical rhythm */
+            .section {
+                padding-top: 3.5rem;
+                padding-bottom: 3.5rem;
+            }
+            /* Metrics section slightly tighter */
             .section.metrics-section {
                 padding-top: 3rem;
                 padding-bottom: 3rem;
+            }
+
+            /* Mobile navigation */
+            nav {
+                padding: 1.5rem 2rem;
+                position: relative;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--bg-color);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                display: none;
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                font-size: 1.1rem;
+                padding: 0.5rem 0;
             }
         }
     </style>
@@ -383,7 +464,12 @@
 
     <nav>
         <div class="logo">Colin O'Neill</div>
-        <div class="nav-links">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
             <a href="#work">Work</a>
             <a href="#leadership">Leadership</a>
             <a href="#thinking">Thinking</a>
@@ -531,16 +617,19 @@
         <span class="label">How I Think</span>
         <div class="grid-3">
             <a href="https://medium.com/@oneill_colin/design-as-service-architecture-serving-human-and-machine-customers-0b2cfeb0b13a" target="_blank" rel="noopener noreferrer" class="thought-card">
-                <span class="thought-title">Design as Service Architecture</span>
+                <span class="thought-title">Design as Service Architecture →</span>
                 <p>Building systems that serve Human & Machine Customers</p>
+                <span class="thought-link-label">Read on Medium</span>
             </a>
             <a href="https://medium.com/@oneill_colin/when-channels-blur-context-is-clarity-23f909cce491" target="_blank" rel="noopener noreferrer" class="thought-card">
-                <span class="thought-title">When Channels Blur, Context Is Clarity</span>
+                <span class="thought-title">When Channels Blur, Context Is Clarity →</span>
                 <p>Why the shift from omnichannel to omnicontext changes the responsibilities of design leaders.</p>
+                <span class="thought-link-label">Read on Medium</span>
             </a>
             <a href="https://medium.com/@oneill_colin/the-context-conundrum-4eb145a3e1dd" target="_blank" rel="noopener noreferrer" class="thought-card">
-                <span class="thought-title">The Context Conundrum</span>
+                <span class="thought-title">The Context Conundrum →</span>
                 <p>AI can accelerate processes but not judgment. Context is the key to designing systems that scale.</p>
+                <span class="thought-link-label">Read on Medium</span>
             </a>
         </div>
     </section>
@@ -631,6 +720,25 @@
 
             // Initial update
             updateButtonStates();
+        }
+
+        // Mobile navigation toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
         }
     </script>
 
