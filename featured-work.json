@@ -1,0 +1,28 @@
+{
+  "workItems": [
+    {
+      "id": "trust-friction",
+      "title": "Trust at the point of friction",
+      "description": "Orchestrated the transformation of a global ad platform's enforcement ecosystem, unifying product teams, policy groups, and vendors around a shared vision: shifting from opaque policing to transparent partnership. Defined the agentic service architecture where AI translates decisions into plain language, empowering advisors to act as growth partners rather than ticket processors.",
+      "outcome": "Delivered a six-year transformation roadmap validating substantial operational savings and new revenue capacity. Targeted a 14% reduction in revenue churn by redirecting support volume from low-value triage to high-value retention.",
+      "caseStudyLink": "social-ad-platform-case-study.html",
+      "active": true
+    },
+    {
+      "id": "confidence-motion",
+      "title": "Confidence in motion",
+      "description": "Implemented  a service architecture for a global auto rental company that connects vehicles, agents, and data into one coherent system, enabling proactive assistance and reducing the friction that undermines traveler confidence.",
+      "outcome": "New GTM play with significant pipeline impact and reusable patterns for future AI initiatives.",
+      "caseStudyLink": "confidence-in-motion.html",
+      "active": true
+    },
+    {
+      "id": "empowering-life-motion",
+      "title": "Empowering a life in motion",
+      "description": "Led a strategic journey program to unify a major membership organization's fragmented experience across UX, content, benefits, and digital services. Implemented a foundational design system to integrate features and services into key journeys, activated siloed programs as a suite of mobile apps and delivered a membership roadmap creating coherence across previously siloed teams and touchpoints.",
+      "outcome": "26% increase in members earning rewards points for primary activities. Defined the organization's personalization platform architecture with 12 user states and 14 activity metrics enabling 168 unique personalized experiences across all digital properties.",
+      "caseStudyLink": "empowering-a-life-in-motion.html",
+      "active": true
+    }
+  ]
+}

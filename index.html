@@ -511,41 +511,8 @@
 
     <section id="work" class="section container">
         <span class="label">Featured Work</span>
-        <div class="work-list">
-
-            <article class="work-card">
-                <div class="work-meta">
-                    <h3>Trust at the point of friction</h3>
-                </div>
-                <div class="work-content">
-                    <p>Orchestrated the transformation of a global ad platform's enforcement ecosystem, unifying product teams, policy groups, and vendors around a shared vision: shifting from opaque policing to transparent partnership. Defined the agentic service architecture where AI translates decisions into plain language, empowering advisors to act as growth partners rather than ticket processors.</p>
-                    <div class="outcome">Outcome: Delivered a six-year transformation roadmap validating substantial operational savings and new revenue capacity. Targeted a 14% reduction in revenue churn by redirecting support volume from low-value triage to high-value retention.</div>
-                    <a href="social-ad-platform-case-study.html" class="work-link">Read Case Study →</a>
-                </div>
-            </article>
-
-            <article class="work-card">
-                <div class="work-meta">
-                    <h3>Confidence in motion</h3>
-                </div>
-                <div class="work-content">
-                    <p>Implemented  a service architecture for a global auto rental company that connects vehicles, agents, and data into one coherent system, enabling proactive assistance and reducing the friction that undermines traveler confidence.</p>
-                    <div class="outcome">Outcome: New GTM play with significant pipeline impact and reusable patterns for future AI initiatives.</div>
-                    <a href="confidence-in-motion.html" class="work-link">Read Case Study →</a>
-                </div>
-            </article>
-
-            <article class="work-card">
-                <div class="work-meta">
-                    <h3>Empowering a life in motion</h3>
-                </div>
-                <div class="work-content">
-                    <p>Led a strategic journey program to unify a major membership organization's fragmented experience across UX, content, benefits, and digital services. Implemented a foundational design system to integrate features and services into key journeys, activated siloed programs as a suite of mobile apps and delivered a membership roadmap creating coherence across previously siloed teams and touchpoints.</p>
-                    <div class="outcome">Outcome: 26% increase in members earning rewards points for primary activities. Defined the organization's personalization platform architecture with 12 user states and 14 activity metrics enabling 168 unique personalized experiences across all digital properties.</div>
-                    <a href="empowering-a-life-in-motion.html" class="work-link">Read Case Study →</a>
-                </div>
-            </article>
-
+        <div class="work-list" id="workList">
+            <!-- Work items loaded dynamically from featured-work.json -->
         </div>
     </section>
 
@@ -740,6 +707,46 @@
                 });
             });
         }
+    </script>
+
+    <script>
+        // Load and render featured work items from JSON
+        async function loadFeaturedWork() {
+            try {
+                const response = await fetch('featured-work.json');
+                const data = await response.json();
+                const workList = document.getElementById('workList');
+
+                // Filter only active work items
+                const activeItems = data.workItems.filter(item => item.active);
+
+                // Render each work item
+                activeItems.forEach(item => {
+                    const article = document.createElement('article');
+                    article.className = 'work-card';
+
+                    article.innerHTML = `
+                        <div class="work-meta">
+                            <h3>${item.title}</h3>
+                        </div>
+                        <div class="work-content">
+                            <p>${item.description}</p>
+                            <div class="outcome">Outcome: ${item.outcome}</div>
+                            <a href="${item.caseStudyLink}" class="work-link">Read Case Study →</a>
+                        </div>
+                    `;
+
+                    workList.appendChild(article);
+                });
+            } catch (error) {
+                console.error('Error loading featured work:', error);
+                // Fallback: show error message
+                document.getElementById('workList').innerHTML = '<p>Unable to load featured work items.</p>';
+            }
+        }
+
+        // Load work items when DOM is ready
+        document.addEventListener('DOMContentLoaded', loadFeaturedWork);
     </script>
 
 </body>
