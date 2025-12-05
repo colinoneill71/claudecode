@@ -1,6 +1,14 @@
 {
   "workItems": [
     {
+      "id": "coherence-patient-systems",
+      "title": "Coherence in a Sea of Patient Systems",
+      "description": "Unifying engagement, platforms, and CX measurement across an acquired care network",
+      "outcome": "",
+      "caseStudyLink": "coherence-patient-systems.html",
+      "active": true
+    },
+    {
       "id": "trust-friction",
       "title": "Trust at the point of friction",
       "description": "Orchestrated the transformation of a global ad platform's enforcement ecosystem, unifying product teams, policy groups, and vendors around a shared vision: shifting from opaque policing to transparent partnership. Defined the agentic service architecture where AI translates decisions into plain language, empowering advisors to act as growth partners rather than ticket processors.",
@@ -22,7 +30,7 @@
       "description": "Led a strategic journey program to unify a major membership organization's fragmented experience across UX, content, benefits, and digital services. Implemented a foundational design system to integrate features and services into key journeys, activated siloed programs as a suite of mobile apps and delivered a membership roadmap creating coherence across previously siloed teams and touchpoints.",
       "outcome": "26% increase in members earning rewards points for primary activities. Defined the organization's personalization platform architecture with 12 user states and 14 activity metrics enabling 168 unique personalized experiences across all digital properties.",
       "caseStudyLink": "empowering-a-life-in-motion.html",
-      "active": true
+      "active": false
     }
   ]
 }
