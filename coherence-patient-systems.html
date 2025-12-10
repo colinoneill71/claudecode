@@ -321,6 +321,31 @@
             display: block;
         }
 
+        /* --- IMAGE SHOWCASE --- */
+        .image-showcase {
+            padding: 1rem 0;
+            margin: 0.75rem 0;
+        }
+
+        .image-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .image-caption {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
         /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
             /* Typography scaling */
@@ -460,6 +485,12 @@
             .hero-image {
                 margin: 0 -2rem;
             }
+
+            /* Image showcase */
+            .image-showcase {
+                padding: 0.75rem 0;
+                margin: 0.5rem 0;
+            }
         }
 
         /* Small mobile devices */
@@ -595,6 +626,17 @@
         <p>The blueprinting process itself was as valuable as the artifact. Marketing, IT, clinical operations, and data teams all sat in the same sessions and walked through William's journey step by step. Many saw, for the first time, how their piece of the stack affected what a patient actually felt and where patients were falling through the cracks.</p>
 
         <p>The outcome was a shared map leaders could point to when they said "this is the experience we are trying to deliver," rather than a collection of loosely related projects and dashboards.</p>
+
+    </article>
+
+    <div class="image-showcase">
+        <div class="image-container">
+            <img src="images/OPTCallout.jpg" alt="Service blueprint showing patient journey mapping and system integration points">
+            <p class="image-caption">Mapping patient journeys across fragmented systems to create a unified experience</p>
+        </div>
+    </div>
+
+    <article class="case-study-content container">
 
         <h2>Teaching the metrics to see the journey</h2>
 
