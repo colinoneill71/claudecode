@@ -321,6 +321,30 @@
             display: block;
         }
 
+        /* --- INLINE BODY IMAGES --- */
+        .image-showcase {
+            background: #fff;
+            padding: 4rem 0;
+            margin: 3rem 0;
+        }
+        .image-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .image-caption {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
         /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
             /* Typography scaling */
@@ -436,6 +460,12 @@
             .insight-box {
                 padding: 1.75rem 1.5rem;
                 margin: 2.5rem 0;
+            }
+
+            /* Inline body images */
+            .image-showcase {
+                padding: 3rem 0;
+                margin: 2rem 0;
             }
 
             /* Footer CTA - stacked buttons */
@@ -612,6 +642,19 @@
                 <p>Empowerment also meant helping advisors build longer-term relationships. With tiered support, personalized education, and loyalty incentives, advisors could guide SMBs beyond troubleshooting into growth strategies. The shoe store owner would no longer hear nonsense lines; she would hear actionable advice, delivered by someone with the tools and authority to back it up.</p>
             </li>
         </ul>
+
+        <!-- INLINE BODY IMAGE EXAMPLE
+        Use this structure to add charts, diagrams, or other visual content within your case study.
+        Recommended image dimensions: 1800px width for optimal retina display (2x the 900px container max-width).
+        Maintain appropriate aspect ratio for your content (16:9 for charts, 4:3 for diagrams, etc.)
+
+        <div class="image-showcase">
+            <div class="image-container">
+                <img src="images/your-chart-or-diagram.jpg" alt="Descriptive alt text for accessibility">
+                <p class="image-caption">Caption explaining what the chart or diagram shows</p>
+            </div>
+        </div>
+        -->
 
         <h2>Why It Matters</h2>
 
