@@ -321,6 +321,33 @@
             display: block;
         }
 
+        /* --- IMAGE SHOWCASE --- */
+        .image-showcase {
+            background: #fff;
+            padding: 4rem 0;
+            margin: 3rem 0;
+        }
+
+        .image-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .image-caption {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
         /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
             /* Typography scaling */
@@ -436,6 +463,12 @@
             .insight-box {
                 padding: 1.75rem 1.5rem;
                 margin: 2.5rem 0;
+            }
+
+            /* Image showcase */
+            .image-showcase {
+                padding: 3rem 0;
+                margin: 2rem 0;
             }
 
             /* Footer CTA - stacked buttons */
@@ -562,6 +595,17 @@
                 <p>Agents no longer need to piece together information from five different systems. They see the full journey: travel context, vehicle status, service history, and available options—all in one interface. This transforms them from transaction processors into travel partners who can actually solve problems.</p>
             </li>
         </ul>
+
+    </article>
+
+    <div class="image-showcase">
+        <div class="image-container">
+            <img src="images/EHIcallout.jpg" alt="Confidence in Motion service architecture connecting vehicles, agents, and data">
+            <p class="image-caption">Unified service architecture enabling proactive traveler support</p>
+        </div>
+    </div>
+
+    <article class="case-study-content container">
 
         <h2>Why It Matters: Trust Through Transparency</h2>
 
