@@ -4,112 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Colin O'Neill - Design & CX Leader</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Design and CX leader shaping how complex organizations deliver customer experience, workforce enablement, and digital operations in an AI-driven world. Expert in journey-led transformation and AI-powered CX systems.">
+    <meta name="author" content="Colin O'Neill">
+    <meta name="keywords" content="design leader, CX strategy, customer experience, AI-powered platforms, service design, journey transformation">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.colinoneill.net/">
+    <meta property="og:title" content="Colin O'Neill - Design & CX Leader">
+    <meta property="og:description" content="Senior design leader building AI-powered journeys, products and platforms that move the needle for customers and the business.">
+    <meta property="og:site_name" content="Colin O'Neill Portfolio">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Colin O'Neill - Design & CX Leader">
+    <meta name="twitter:description" content="Senior design leader building AI-powered journeys, products and platforms that move the needle for customers and the business.">
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
     <style>
-        /* --- GLOBAL VARIABLES & RESET --- */
+        /* --- INDEX-SPECIFIC STYLES --- */
+
+        /* Override background color for index page */
         :root {
             --bg-color: #FFFCF7;
-            --text-main: #2a2420;
-            --text-secondary: #5a4f47;
-            --accent-green: #D4856A;
-            --accent-olive: #C99A6E;
-            --accent-bg: #FFF3E6;
-            --border-color: #F0E4D7;
-            --spacing-unit: 1rem;
-            --container-width: 1200px;
-            --font-family-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            --font-family-heading: 'Georgia', 'Times New Roman', serif;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: var(--font-family-body);
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3, h4 {
-            font-family: var(--font-family-heading);
-            font-weight: 600;
-            letter-spacing: -0.01em;
-            line-height: 1.15;
-        }
-
-        h1 { font-size: 3.5rem; margin-bottom: 2rem; font-weight: 500; max-width: 975px; }
-        h2 { font-size: 1.5rem; color: var(--text-secondary); font-weight: 400; margin-bottom: 2.5rem; max-width: 800px; line-height: 1.5; }
-        h3 { font-size: 1.75rem; margin-bottom: 0.75rem; font-weight: 500; }
-        p { color: var(--text-secondary); margin-bottom: 1.25rem; font-size: 1.1rem; line-height: 1.7; }
-
-        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
-        a:hover { opacity: 0.7; }
-
-        .accent { color: var(--accent-green); }
-
-        /* --- UTILITIES --- */
         .container {
             max-width: var(--container-width);
-            margin: 0 auto;
             padding: 0 3rem;
         }
 
         .section { padding-top: 6rem; padding-bottom: 6rem; border-bottom: 1px solid var(--border-color); }
         .section-last { border-bottom: none; }
 
+        /* Index-specific label color */
         .label {
-            text-transform: uppercase;
             font-size: 0.8rem;
-            letter-spacing: 0.1em;
             color: #C0795A;
-            font-weight: 600;
             margin-bottom: 2rem;
-            display: block;
         }
 
-        /* --- BUTTONS --- */
+        /* Index-specific typography */
+        h1 { max-width: 975px; }
+        h2 { font-size: 1.5rem; color: var(--text-secondary); font-weight: 400; margin-bottom: 2.5rem; max-width: 800px; line-height: 1.5; margin-top: 0; }
+        h3 { font-size: 1.75rem; margin-bottom: 0.75rem; margin-top: 0; }
+        p { margin-bottom: 1.25rem; font-size: 1.1rem; line-height: 1.7; }
+
+        /* --- INDEX-SPECIFIC BUTTONS --- */
         .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
 
         .btn {
             padding: 0.7rem 1.575rem;
-            font-weight: 500;
             font-size: 0.665rem;
             border-radius: 6px;
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: all 0.25s ease;
             letter-spacing: 0.01em;
-            display: inline-block;
         }
 
         .btn-primary {
-            background-color: var(--text-main);
-            color: #fff;
             box-shadow: 0 2px 8px rgba(42, 36, 32, 0.12);
         }
 
         .btn-primary:hover {
-            background-color: var(--accent-green);
-            opacity: 1;
             box-shadow: 0 4px 12px rgba(212, 133, 106, 0.2);
             transform: translateY(-1px);
         }
 
         .btn-secondary {
-            background-color: transparent;
-            color: var(--text-main);
             border: 1.5px solid var(--text-main);
         }
 
         .btn-secondary:hover {
-            background-color: var(--text-main);
-            color: #fff;
-            opacity: 1;
             transform: translateY(-1px);
         }
 
@@ -345,19 +313,7 @@
             gap: 4rem;
         }
 
-        /* --- NAVIGATION --- */
-        nav {
-            padding: 2rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        nav .logo {
-            font-family: var(--font-family-body);
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.02em;
-        }
+        /* --- INDEX-SPECIFIC NAVIGATION --- */
         nav .nav-links {
             display: flex;
             gap: 2rem;
@@ -710,39 +666,73 @@
     </script>
 
     <script>
-        // Load and render featured work items from JSON
-        async function loadFeaturedWork() {
-            try {
-                const response = await fetch('featured-work.json');
-                const data = await response.json();
-                const workList = document.getElementById('workList');
+        // Inlined featured work data (eliminates HTTP request)
+        const featuredWorkData = {
+            "workItems": [
+                {
+                    "id": "coherence-patient-systems",
+                    "title": "Coherence in a Sea of Patient Systems",
+                    "description": "Unified the patient experience across a national healthcare network by connecting isolated platforms and data. This created a single, scalable system that drives consistent improvements at newly acquired clinics.",
+                    "outcome": "Delivered an enterprise transformation roadmap validating the consolidation of disparate legacy stacks into a single patient identity layer. Achieved a 2.5x increase in digital appointment bookings (from 20% to 50%) in pilot regions by removing friction from the scheduling journey, while establishing a governance framework that aligns clinicians around a unified, outcome-based measure of engagement.",
+                    "caseStudyLink": "coherence-patient-systems.html",
+                    "active": true
+                },
+                {
+                    "id": "trust-friction",
+                    "title": "Trust at the point of friction",
+                    "description": "Orchestrated the transformation of a global ad platform's enforcement ecosystem, unifying product teams, policy groups, and vendors around a shared vision: shifting from opaque policing to transparent partnership. Defined the agentic service architecture where AI translates decisions into plain language, empowering advisors to act as growth partners rather than ticket processors.",
+                    "outcome": "Delivered a six-year transformation roadmap validating substantial operational savings and new revenue capacity. Targeted a 14% reduction in revenue churn by redirecting support volume from low-value triage to high-value retention.",
+                    "caseStudyLink": "social-ad-platform-case-study.html",
+                    "active": true
+                },
+                {
+                    "id": "confidence-motion",
+                    "title": "Confidence in motion",
+                    "description": "Implemented  a service architecture for a global auto rental company that connects vehicles, agents, and data into one coherent system, enabling proactive assistance and reducing the friction that undermines traveler confidence.",
+                    "outcome": "New GTM play with significant pipeline impact and reusable patterns for future AI initiatives.",
+                    "caseStudyLink": "confidence-in-motion.html",
+                    "active": true
+                },
+                {
+                    "id": "empowering-life-motion",
+                    "title": "Empowering a life in motion",
+                    "description": "Led a strategic journey program to unify a major membership organization's fragmented experience across UX, content, benefits, and digital services. Implemented a foundational design system to integrate features and services into key journeys, activated siloed programs as a suite of mobile apps and delivered a membership roadmap creating coherence across previously siloed teams and touchpoints.",
+                    "outcome": "26% increase in members earning rewards points for primary activities. Defined the organization's personalization platform architecture with 12 user states and 14 activity metrics enabling 168 unique personalized experiences across all digital properties.",
+                    "caseStudyLink": "empowering-a-life-in-motion.html",
+                    "active": false
+                }
+            ]
+        };
 
-                // Filter only active work items
-                const activeItems = data.workItems.filter(item => item.active);
+        // Render featured work items
+        function loadFeaturedWork() {
+            const workList = document.getElementById('workList');
 
-                // Render each work item
-                activeItems.forEach(item => {
-                    const article = document.createElement('article');
-                    article.className = 'work-card';
+            // Filter only active work items
+            const activeItems = featuredWorkData.workItems.filter(item => item.active);
 
-                    article.innerHTML = `
-                        <div class="work-meta">
-                            <h3>${item.title}</h3>
-                        </div>
-                        <div class="work-content">
-                            <p>${item.description}</p>
-                            <div class="outcome">Outcome: ${item.outcome}</div>
-                            <a href="${item.caseStudyLink}" class="work-link">Read Case Study →</a>
-                        </div>
-                    `;
+            // Render each work item using DocumentFragment for better performance
+            const fragment = document.createDocumentFragment();
 
-                    workList.appendChild(article);
-                });
-            } catch (error) {
-                console.error('Error loading featured work:', error);
-                // Fallback: show error message
-                document.getElementById('workList').innerHTML = '<p>Unable to load featured work items.</p>';
-            }
+            activeItems.forEach(item => {
+                const article = document.createElement('article');
+                article.className = 'work-card';
+
+                article.innerHTML = `
+                    <div class="work-meta">
+                        <h3>${item.title}</h3>
+                    </div>
+                    <div class="work-content">
+                        <p>${item.description}</p>
+                        <div class="outcome">Outcome: ${item.outcome}</div>
+                        <a href="${item.caseStudyLink}" class="work-link">Read Case Study →</a>
+                    </div>
+                `;
+
+                fragment.appendChild(article);
+            });
+
+            workList.appendChild(fragment);
         }
 
         // Load work items when DOM is ready

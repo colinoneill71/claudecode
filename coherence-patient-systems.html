@@ -5,113 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coherence in a Sea of Patient Systems | Colin O'Neill</title>
 
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Unified the patient experience across a national healthcare network by connecting isolated platforms and data. Achieved 2.5x increase in digital appointment bookings through friction reduction in the scheduling journey.">
+    <meta name="author" content="Colin O'Neill">
+    <meta name="keywords" content="healthcare CX, patient experience, service design, journey transformation, healthcare digital transformation, appointment booking optimization">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.colinoneill.net/coherence-patient-systems.html">
+    <meta property="og:title" content="Coherence in a Sea of Patient Systems | Colin O'Neill">
+    <meta property="og:description" content="How we unified patient experience across a national healthcare network, achieving a 2.5x increase in digital appointment bookings.">
+    <meta property="og:site_name" content="Colin O'Neill Portfolio">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Coherence in a Sea of Patient Systems">
+    <meta name="twitter:description" content="Unified patient experience transformation delivering 2.5x increase in digital bookings.">
+
     <!-- Password Protection -->
     <link rel="stylesheet" href="password-protection.css">
 
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
     <style>
-        /* --- GLOBAL VARIABLES & RESET --- */
-        :root {
-            --bg-color: #FFF9F0;
-            --text-main: #2a2420;
-            --text-secondary: #5a4f47;
-            --accent-green: #D4856A;
-            --accent-olive: #C99A6E;
-            --accent-bg: #FFF3E6;
-            --border-color: #F0E4D7;
-            --spacing-unit: 1rem;
-            --container-width: 1200px;
-            --font-family-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            --font-family-heading: 'Georgia', 'Times New Roman', serif;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: var(--font-family-body);
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3, h4 {
-            font-family: var(--font-family-heading);
-            font-weight: 600;
-            letter-spacing: -0.01em;
-            line-height: 1.15;
-        }
-
-        h1 { font-size: 3.5rem; margin-bottom: 2rem; font-weight: 500; line-height: 1.1; }
-        h2 { font-size: 2rem; color: var(--text-main); font-weight: 500; margin-top: 4rem; margin-bottom: 1.5rem; }
-        h3 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; font-weight: 500; }
-        h4 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: 0.75rem; font-weight: 600; }
-
-        p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 1.15rem;
-            line-height: 1.8;
-            max-width: 750px;
-        }
-
-        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
-        a:hover { opacity: 0.7; }
-
-        .accent { color: var(--accent-green); }
-
-        /* --- UTILITIES --- */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 3rem;
-        }
-
-        .wide-container {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 3rem;
-        }
-
-        .label {
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 0.1em;
-            color: var(--text-secondary);
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        /* --- NAVIGATION --- */
-        nav {
-            padding: 2rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-        nav .logo {
-            font-family: var(--font-family-body);
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.02em;
-        }
-        nav .back-link {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            text-decoration: underline;
-            text-decoration-color: transparent;
-            transition: text-decoration-color 0.2s;
-        }
-        nav .back-link:hover {
-            text-decoration-color: var(--text-secondary);
-            opacity: 1;
-        }
+        /* --- CASE STUDY SPECIFIC STYLES --- */
 
         /* --- CASE STUDY HEADER --- */
         .case-study-header {
@@ -264,49 +182,8 @@
             max-width: 100%;
         }
 
-        /* --- FOOTER --- */
-        footer {
-            padding: 4rem 0;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-        }
-
-        .footer-cta {
-            margin-top: 2rem;
-        }
-
-        .btn {
-            padding: 0.9rem 1.8rem;
-            font-weight: 500;
-            font-size: 0.95rem;
-            border-radius: 2px;
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background-color: var(--text-main);
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-green);
-            opacity: 1;
-        }
-
         .btn-secondary {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--text-main);
             margin-left: 1rem;
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--text-main);
-            color: #fff;
-            opacity: 1;
         }
 
         /* --- HERO IMAGE --- */
@@ -556,7 +433,7 @@
     </header>
 
     <div class="hero-image">
-        <img src="images/Opt_Case.jpg" alt="Coherence in a Sea of Patient Systems Case Study Hero Image">
+        <img src="images/Opt_Case.jpg" alt="Coherence in a Sea of Patient Systems Case Study Hero Image" loading="lazy" width="1200" height="800">
     </div>
 
     <article class="case-study-content container">
@@ -631,7 +508,7 @@
 
     <div class="image-showcase">
         <div class="image-container">
-            <img src="images/OPTCallout.jpg" alt="Service blueprint showing patient journey mapping and system integration points">
+            <img src="images/OPTCallout.jpg" alt="Service blueprint showing patient journey mapping and system integration points" loading="lazy" width="1200" height="675">
             <p class="image-caption">Mapping patient journeys across fragmented systems to create a unified experience</p>
         </div>
     </div>
