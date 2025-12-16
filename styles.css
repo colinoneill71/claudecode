@@ -68,7 +68,7 @@ h4 {
 p {
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
-    font-size: 1.15rem;
+    font-size: 1rem;
     line-height: 1.8;
     max-width: 750px;
 }
