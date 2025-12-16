@@ -25,10 +25,111 @@
     <!-- Password Protection -->
     <link rel="stylesheet" href="password-protection.css">
 
-    <!-- External Stylesheet -->
-    <link rel="stylesheet" href="styles.css">
-
     <style>
+        /* --- GLOBAL VARIABLES & RESET --- */
+        :root {
+            --bg-color: #FFF9F0;
+            --text-main: #2a2420;
+            --text-secondary: #5a4f47;
+            --accent-green: #D4856A;
+            --accent-olive: #C99A6E;
+            --accent-bg: #FFF3E6;
+            --border-color: #F0E4D7;
+            --spacing-unit: 1rem;
+            --container-width: 1200px;
+            --font-family-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-family-heading: 'Georgia', 'Times New Roman', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-family-heading);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+        }
+
+        h1 { font-size: 3.5rem; margin-bottom: 2rem; font-weight: 500; line-height: 1.1; }
+        h2 { font-size: 2rem; color: var(--text-main); font-weight: 500; margin-top: 4rem; margin-bottom: 1.5rem; }
+        h3 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; font-weight: 500; }
+        h4 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: 0.75rem; font-weight: 600; }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            max-width: 750px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        a:hover { opacity: 0.7; }
+
+        .accent { color: var(--accent-green); }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .wide-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .label {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        nav .logo {
+            font-family: var(--font-family-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
+        nav .back-link {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: text-decoration-color 0.2s;
+        }
+        nav .back-link:hover {
+            text-decoration-color: var(--text-secondary);
+            opacity: 1;
+        }
+
         /* --- CASE STUDY SPECIFIC STYLES --- */
 
         /* --- CASE STUDY HEADER --- */
@@ -182,8 +283,49 @@
             max-width: 100%;
         }
 
+        /* --- FOOTER --- */
+        footer {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-cta {
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.9rem 1.8rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-radius: 2px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--text-main);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-green);
+            opacity: 1;
+        }
+
         .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--text-main);
             margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--text-main);
+            color: #fff;
+            opacity: 1;
         }
 
         /* --- HERO IMAGE --- */
@@ -196,6 +338,28 @@
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        /* --- INLINE BODY IMAGES --- */
+        .image-showcase {
+            padding: 0.5rem 0;
+            margin: 0.375rem 0;
+        }
+        .image-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .image-caption {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: italic;
         }
 
         /* --- MOBILE RESPONSIVE --- */
@@ -315,6 +479,12 @@
                 margin: 2.5rem 0;
             }
 
+            /* Inline body images */
+            .image-showcase {
+                padding: 0.375rem 0;
+                margin: 0.25rem 0;
+            }
+
             /* Footer CTA - stacked buttons */
             .footer-cta {
                 display: flex;
@@ -397,6 +567,10 @@
             <div class="meta-item">
                 <span class="meta-label">Focus</span>
                 <span class="meta-value">SMB Support, AI Operations, Trust</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Impact</span>
+                <span class="meta-value">$624M cost savings, $31.5B revenue opportunity</span>
             </div>
         </div>
     </header>
@@ -485,6 +659,19 @@
                 <p>Empowerment also meant helping advisors build longer-term relationships. With tiered support, personalized education, and loyalty incentives, advisors could guide SMBs beyond troubleshooting into growth strategies. The shoe store owner would no longer hear nonsense lines; she would hear actionable advice, delivered by someone with the tools and authority to back it up.</p>
             </li>
         </ul>
+
+        <!-- INLINE BODY IMAGE EXAMPLE
+        Use this structure to add charts, diagrams, or other visual content within your case study.
+        Recommended image dimensions: 1800px width for optimal retina display (2x the 900px container max-width).
+        Maintain appropriate aspect ratio for your content (16:9 for charts, 4:3 for diagrams, etc.)
+
+        <div class="image-showcase">
+            <div class="image-container">
+                <img src="images/your-chart-or-diagram.jpg" alt="Descriptive alt text for accessibility">
+                <p class="image-caption">Caption explaining what the chart or diagram shows</p>
+            </div>
+        </div>
+        -->
 
         <h2>Why It Matters</h2>
 

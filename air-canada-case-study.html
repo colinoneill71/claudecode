@@ -25,9 +25,6 @@
     <!-- Password Protection -->
     <link rel="stylesheet" href="password-protection.css">
 
-    <!-- External Stylesheet -->
-    <link rel="stylesheet" href="styles.css">
-
     <style>
         /* --- GLOBAL VARIABLES & RESET --- */
         :root {
@@ -78,6 +75,12 @@
 
         /* --- UTILITIES --- */
         .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .wide-container {
             max-width: var(--container-width);
             margin: 0 auto;
             padding: 0 3rem;
@@ -121,35 +124,50 @@
             opacity: 1;
         }
 
-        /* --- CASE STUDY HERO --- */
-        .case-hero {
-            padding: 4rem 0;
+        /* --- CASE STUDY HEADER --- */
+        .case-study-header {
+            padding-top: 6rem;
+            padding-bottom: 4rem;
             border-bottom: 1px solid var(--border-color);
         }
-        .meta-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-        }
-        .meta-item h4 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            font-family: var(--font-family-body);
-        }
-        .meta-item p {
-            font-size: 1rem;
-            color: var(--text-main);
-            margin: 0;
+
+        .case-study-header h1 {
+            max-width: 900px;
         }
 
-        /* --- IMAGE SECTIONS --- */
+        .case-study-meta {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .meta-label {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .meta-value {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* --- CASE STUDY CONTENT --- */
+        .case-study-content {
+            padding: 5rem 0;
+        }
+
+        /* --- INLINE BODY IMAGES --- */
         .image-showcase {
             padding: 0.5rem 0;
             margin: 0.375rem 0;
@@ -176,14 +194,21 @@
             max-width: 800px;
             margin: 3rem auto;
         }
+
+        /* --- QUOTE CALLOUT / HIGHLIGHT BOX --- */
         .highlight-box {
             background: var(--accent-bg);
-            padding: 2rem;
+            padding: 2.5rem;
             border-left: 4px solid var(--accent-green);
-            margin: 2rem 0;
+            margin: 3rem 0;
+            max-width: 100%;
         }
         .highlight-box h3 {
             margin-top: 0;
+            color: var(--text-main);
+        }
+        .highlight-box p {
+            max-width: 100%;
         }
 
         ul {
@@ -196,13 +221,58 @@
             line-height: 1.6;
         }
 
+        /* --- FOOTER --- */
+        footer {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-cta {
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.9rem 1.8rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-radius: 2px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--text-main);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-green);
+            opacity: 1;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--text-main);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--text-main);
+            color: #fff;
+            opacity: 1;
+        }
+
         /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
             /* Typography scaling */
-            h1 { font-size: 2rem; }
+            h1 { font-size: 2.25rem; }
             h2 {
                 font-size: 1.5rem;
-                margin-top: 2.5rem;
+                margin-top: 3rem;
                 margin-bottom: 1.25rem;
             }
             h3 {
@@ -210,13 +280,19 @@
                 margin-top: 2rem;
                 margin-bottom: 0.875rem;
             }
+            h4 {
+                font-size: 1.05rem;
+                margin-top: 1.5rem;
+                margin-bottom: 0.625rem;
+            }
             p {
                 font-size: 1rem;
                 line-height: 1.7;
+                max-width: 100%;
             }
 
             /* Container and layout */
-            .container { padding: 0 2rem; }
+            .container, .wide-container { padding: 0 2rem; }
 
             /* Navigation */
             nav {
@@ -234,8 +310,20 @@
             }
 
             /* Header sections */
-            .case-hero {
-                padding: 3rem 0;
+            .case-study-header { padding-top: 4rem; padding-bottom: 3rem; }
+            .case-study-content { padding: 3rem 0; }
+
+            /* Header h1 improvements */
+            .case-study-header h1 {
+                max-width: 100%;
+            }
+            .case-study-header h1 br {
+                display: none; /* Remove forced line breaks on mobile */
+            }
+            .case-study-header h1 .accent {
+                display: block;
+                margin-top: 0.5rem;
+                font-size: 0.95em;
             }
 
             /* Label sizing */
@@ -245,17 +333,17 @@
                 margin-bottom: 1rem;
             }
 
-            /* Meta grid */
-            .meta-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+            /* Meta information */
+            .case-study-meta {
+                gap: 2rem 1.5rem;
                 margin-top: 2rem;
             }
-            .meta-item h4 {
+            .meta-label {
                 font-size: 0.65rem;
             }
-            .meta-item p {
+            .meta-value {
                 font-size: 0.9rem;
+                line-height: 1.4;
             }
 
             /* Content sections */
@@ -267,7 +355,7 @@
             /* Highlight box */
             .highlight-box {
                 padding: 1.75rem 1.5rem;
-                margin: 2rem 0;
+                margin: 2.5rem 0;
             }
 
             /* Image showcase */
@@ -275,34 +363,52 @@
                 padding: 0.375rem 0;
                 margin: 0.25rem 0;
             }
+
+            /* Footer CTA - stacked buttons */
+            .footer-cta {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+                min-height: 44px;
+                padding: 0.75rem 1.5rem;
+            }
+            .btn-secondary {
+                margin-left: 0;
+            }
         }
 
         /* Small mobile devices */
         @media (max-width: 480px) {
-            h1 { font-size: 1.75rem; }
+            h1 { font-size: 1.875rem; }
             h2 { font-size: 1.375rem; }
             h3 { font-size: 1.125rem; }
 
-            .container { padding: 0 1.25rem; }
+            .container, .wide-container { padding: 0 1.25rem; }
 
             /* Navigation margins for small screens */
             nav {
                 padding: 1.5rem 1.25rem;
             }
 
-            .case-hero {
-                padding: 2.5rem 0;
-            }
+            .case-study-header { padding-top: 2.5rem; padding-bottom: 2rem; }
 
-            .meta-grid {
-                gap: 1.25rem;
+            /* Header optimizations for small screens */
+            .case-study-meta {
+                gap: 1.5rem 1rem;
                 margin-top: 1.5rem;
             }
-            .meta-item h4 {
-                font-size: 0.65rem;
+            .meta-item {
+                gap: 0.375rem;
             }
-            .meta-item p {
+            .meta-value {
                 font-size: 0.85rem;
+                word-break: break-word;
             }
         }
     </style>
@@ -314,28 +420,29 @@
         <a href="index.html" class="back-link">← Back to Portfolio</a>
     </nav>
 
-    <section class="case-hero">
-        <div class="container">
-            <span class="label">Case Study</span>
-            <h1>Operational Intelligence: Service Under Pressure</h1>
-            <p style="font-size: 1.25rem; max-width: 700px;">How empowering frontline airline staff with real-time context and flexible tools transformed passenger dignity and reduced regulatory complaints.</p>
+    <header class="case-study-header container">
+        <span class="label">Case Study</span>
+        <h1>Operational Intelligence: Service Under Pressure</h1>
 
-            <div class="meta-grid">
-                <div class="meta-item">
-                    <h4>Client</h4>
-                    <p>Air Canada</p>
-                </div>
-                <div class="meta-item">
-                    <h4>Role</h4>
-                    <p>Lead Product Designer / CX Strategy</p>
-                </div>
-                <div class="meta-item">
-                    <h4>Year</h4>
-                    <p>2023-2024</p>
-                </div>
+        <div class="case-study-meta">
+            <div class="meta-item">
+                <span class="meta-label">Client</span>
+                <span class="meta-value">Air Canada</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Role</span>
+                <span class="meta-value">Lead Product Designer / CX Strategy</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Year</span>
+                <span class="meta-value">2023-2024</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Focus</span>
+                <span class="meta-value">Crew Intelligence, Service Recovery, Passenger Experience</span>
             </div>
         </div>
-    </section>
+    </header>
 
     <section class="section">
         <div class="container content-section">
@@ -411,11 +518,14 @@
         </div>
     </section>
 
-    <section class="section" style="border-top: 1px solid var(--border-color); padding-top: 3rem;">
-        <div class="container" style="text-align: center;">
-            <a href="index.html" class="back-link" style="font-size: 1rem;">← Back to All Work</a>
+    <footer class="container">
+        <h3>Interested in this work?</h3>
+        <p>Let's discuss how strategic CX design can drive both customer satisfaction and business outcomes.</p>
+        <div class="footer-cta">
+            <a href="index.html#contact" class="btn btn-primary">Get in Touch</a>
+            <a href="index.html#work" class="btn btn-secondary">View More Work</a>
         </div>
-    </section>
+    </footer>
 
     <!-- Password Protection Script -->
     <script src="password-protection.js"></script>
