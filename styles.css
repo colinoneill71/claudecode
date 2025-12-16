@@ -175,7 +175,7 @@ nav .back-link:hover {
 
 /* --- FOOTER --- */
 footer {
-    padding: 4rem 0;
+    padding: 4rem 0 6rem 0;
     border-top: 1px solid var(--border-color);
     text-align: center;
 }
