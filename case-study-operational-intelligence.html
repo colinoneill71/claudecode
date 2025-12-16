@@ -426,6 +426,12 @@
                 margin: 2.5rem 0;
             }
 
+            /* Inline body images */
+            .image-showcase {
+                padding: 0.375rem 0;
+                margin: 0.25rem 0;
+            }
+
             /* Footer CTA - stacked buttons */
             .footer-cta {
                 display: flex;
@@ -442,6 +448,11 @@
             }
             .btn-secondary {
                 margin-left: 0;
+            }
+
+            /* Hero image edge bleed */
+            .hero-image {
+                margin: 0 -2rem;
             }
         }
 
@@ -473,6 +484,10 @@
                 font-size: 0.85rem;
                 word-break: break-word;
             }
+
+            .hero-image {
+                margin: 0 -1.25rem;
+            }
         }
     </style>
 </head>
@@ -500,8 +515,16 @@
                 <span class="meta-label">Focus</span>
                 <span class="meta-value">SMB Support, AI Operations, Trust</span>
             </div>
+            <div class="meta-item">
+                <span class="meta-label">Impact</span>
+                <span class="meta-value">$624M cost savings, $31.5B revenue opportunity</span>
+            </div>
         </div>
     </header>
+
+    <div class="hero-image">
+        <img src="images/F4_1.png" alt="Operational Intelligence Case Study Hero Image">
+    </div>
 
     <article class="case-study-content container">
 
@@ -583,6 +606,19 @@
                 <p>Empowerment also meant helping advisors build longer-term relationships. With tiered support, personalized education, and loyalty incentives, advisors could guide SMBs beyond troubleshooting into growth strategies. The shoe store owner would no longer hear nonsense lines; she would hear actionable advice, delivered by someone with the tools and authority to back it up.</p>
             </li>
         </ul>
+
+        <!-- INLINE BODY IMAGE EXAMPLE
+        Use this structure to add charts, diagrams, or other visual content within your case study.
+        Recommended image dimensions: 1800px width for optimal retina display (2x the 900px container max-width).
+        Maintain appropriate aspect ratio for your content (16:9 for charts, 4:3 for diagrams, etc.)
+
+        <div class="image-showcase">
+            <div class="image-container">
+                <img src="images/your-chart-or-diagram.jpg" alt="Descriptive alt text for accessibility">
+                <p class="image-caption">Caption explaining what the chart or diagram shows</p>
+            </div>
+        </div>
+        -->
 
         <h2>Why It Matters</h2>
 
