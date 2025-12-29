@@ -102,12 +102,20 @@
         .pillar-num { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; display: block; opacity: 0.4; font-family: var(--font-family-body);}
 
         /* --- 4. FEATURED WORK --- */
-        .work-tabs {
+        .work-header {
             display: flex;
-            justify-content: flex-end;
-            gap: 0.5rem;
+            justify-content: space-between;
+            align-items: flex-end;
             margin-bottom: 3rem;
             border-bottom: 1px solid var(--border-color);
+        }
+        .work-header .label {
+            margin-bottom: 0;
+            padding-bottom: 1rem;
+        }
+        .work-tabs {
+            display: flex;
+            gap: 0.5rem;
         }
         .work-tab {
             background: transparent;
@@ -495,10 +503,12 @@
     </section>
 
     <section id="work" class="section container">
-        <span class="label">Featured Work</span>
-        <div class="work-tabs">
-            <button class="work-tab active" data-category="journeys">Journeys</button>
-            <button class="work-tab" data-category="product">Product</button>
+        <div class="work-header">
+            <span class="label">Featured Work</span>
+            <div class="work-tabs">
+                <button class="work-tab active" data-category="journeys">Journeys</button>
+                <button class="work-tab" data-category="product">Product</button>
+            </div>
         </div>
         <div class="work-list" id="workList">
             <!-- Work items loaded dynamically from featured-work.json -->
