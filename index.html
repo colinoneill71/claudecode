@@ -102,6 +102,31 @@
         .pillar-num { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; display: block; opacity: 0.4; font-family: var(--font-family-body);}
 
         /* --- 4. FEATURED WORK --- */
+        .work-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .work-tab {
+            background: transparent;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-family: var(--font-family-body);
+            font-size: 1rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        .work-tab:hover {
+            color: var(--text-main);
+        }
+        .work-tab.active {
+            color: var(--text-main);
+            border-bottom-color: var(--accent-green);
+        }
         .work-list { display: flex; flex-direction: column; gap: 4rem; }
         .work-card {
             display: grid;
@@ -470,6 +495,10 @@
 
     <section id="work" class="section container">
         <span class="label">Featured Work</span>
+        <div class="work-tabs">
+            <button class="work-tab active" data-category="journeys">Journeys</button>
+            <button class="work-tab" data-category="product">Product</button>
+        </div>
         <div class="work-list" id="workList">
             <!-- Work items loaded dynamically from featured-work.json -->
         </div>
@@ -678,6 +707,7 @@
                     "description": "Service design to unify the patient experience for a national healthcare network by connecting fragmented platforms, processes, and data into one scalable system that drives consistent improvements across newly acquired clinics.",
                     "outcome": "Delivered an enterprise service architecture that consolidated legacy stacks into a unified patient identity layer. Increased digital appointment bookings by 30% in pilot regions by removing friction from the scheduling journey, and aligned measurement to outcome-based indicators of engagement and satisfaction.",
                     "caseStudyLink": "coherence-patient-systems.html",
+                    "category": "journeys",
                     "active": true
                 },
                 {
@@ -686,6 +716,7 @@
                     "description": "Orchestrated the transformation of a global social ad platform's quality enforcement ecosystem, unifying product teams, policy groups, and vendors around a shared vision. Defined the agentic service architecture that enables AI to translates decisions into customer-facing language, empowering advisors to act as growth partners rather than ticket processors.",
                     "outcome": "Delivered a six-year transformation roadmap validating substantial operational savings and new revenue capacity. Identified a 14% reduction in revenue churn by redirecting support volume from low-value triage to high-value retention.",
                     "caseStudyLink": "social-ad-platform-case-study.html",
+                    "category": "journeys",
                     "active": true
                 },
                 {
@@ -694,6 +725,7 @@
                     "description": "Implemented a service architecture for a global auto rental company that connects vehicles, agents, and data into one coherent system, enabling proactive assistance and reducing the friction that undermines traveler confidence.",
                     "outcome": "Initiated a three-year transformation program to unlock a 20% reduction in operational costs, and an identified 30% increase in revenue through an integrated AI-powered platform.",
                     "caseStudyLink": "confidence-in-motion.html",
+                    "category": "journeys",
                     "active": true
                 },
                 {
@@ -702,22 +734,28 @@
                     "description": "Led a strategic journey program to unify a major membership organization's fragmented experience across UX, content, benefits, and digital services. Implemented a foundational design system to integrate features and services into key journeys, activated siloed programs as a suite of mobile apps and delivered a membership roadmap creating coherence across previously siloed teams and touchpoints.",
                     "outcome": "26% increase in members earning rewards points for primary activities. Defined the organization's personalization platform architecture with 12 user states and 14 activity metrics enabling 168 unique personalized experiences across all digital properties.",
                     "caseStudyLink": "empowering-a-life-in-motion.html",
+                    "category": "journeys",
                     "active": false
                 }
             ]
         };
 
-        // Render featured work items
-        function loadFeaturedWork() {
+        // Render featured work items by category
+        function loadFeaturedWork(category = 'journeys') {
             const workList = document.getElementById('workList');
 
-            // Filter only active work items
-            const activeItems = featuredWorkData.workItems.filter(item => item.active);
+            // Filter by active status and category
+            const filteredItems = featuredWorkData.workItems.filter(item =>
+                item.active && item.category === category
+            );
+
+            // Clear existing items
+            workList.innerHTML = '';
 
             // Render each work item using DocumentFragment for better performance
             const fragment = document.createDocumentFragment();
 
-            activeItems.forEach(item => {
+            filteredItems.forEach(item => {
                 const article = document.createElement('article');
                 article.className = 'work-card';
 
@@ -738,8 +776,53 @@
             workList.appendChild(fragment);
         }
 
-        // Load work items when DOM is ready
-        document.addEventListener('DOMContentLoaded', loadFeaturedWork);
+        // Handle tab switching
+        function switchTab(category) {
+            // Update active tab styling
+            const tabs = document.querySelectorAll('.work-tab');
+            tabs.forEach(tab => {
+                if (tab.dataset.category === category) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+
+            // Load work items for selected category
+            loadFeaturedWork(category);
+
+            // Update URL hash (1 for journeys, 2 for product)
+            const hashMap = { 'journeys': '1', 'product': '2' };
+            window.location.hash = hashMap[category];
+        }
+
+        // Get category from hash (#1 = journeys, #2 = product)
+        function getCategoryFromHash() {
+            const hash = window.location.hash.replace('#', '');
+            const categoryMap = { '1': 'journeys', '2': 'product' };
+            return categoryMap[hash] || 'journeys'; // Default to journeys
+        }
+
+        // Initialize tabs and load work items when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial category from hash or default to journeys
+            const initialCategory = getCategoryFromHash();
+            switchTab(initialCategory);
+
+            // Add click handlers to tabs
+            const tabs = document.querySelectorAll('.work-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    switchTab(this.dataset.category);
+                });
+            });
+
+            // Handle hash changes (for browser back/forward)
+            window.addEventListener('hashchange', function() {
+                const category = getCategoryFromHash();
+                switchTab(category);
+            });
+        });
     </script>
 
 </body>
