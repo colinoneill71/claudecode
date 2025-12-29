@@ -116,6 +116,20 @@
         .work-tabs {
             display: flex;
             gap: 0.5rem;
+            position: relative;
+            --indicator-left: 0px;
+            --indicator-width: 0px;
+        }
+        .work-tabs::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: var(--indicator-left);
+            width: var(--indicator-width);
+            height: 2px;
+            background-color: var(--accent-green);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
         }
         .work-tab {
             background: transparent;
@@ -125,8 +139,7 @@
             font-size: 1rem;
             color: var(--text-secondary);
             cursor: pointer;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s ease;
+            transition: color 0.2s ease;
             font-weight: 500;
         }
         .work-tab:hover {
@@ -134,7 +147,6 @@
         }
         .work-tab.active {
             color: var(--text-main);
-            border-bottom-color: var(--accent-green);
         }
         .work-list { display: flex; flex-direction: column; gap: 4rem; }
         .work-card {
@@ -787,6 +799,23 @@
             workList.appendChild(fragment);
         }
 
+        // Update tab indicator position
+        function updateTabIndicator() {
+            const activeTab = document.querySelector('.work-tab.active');
+            const tabsContainer = document.querySelector('.work-tabs');
+
+            if (activeTab && tabsContainer) {
+                const containerRect = tabsContainer.getBoundingClientRect();
+                const activeRect = activeTab.getBoundingClientRect();
+                const left = activeRect.left - containerRect.left;
+                const width = activeRect.width;
+
+                // Update the ::after pseudo-element via CSS custom properties
+                tabsContainer.style.setProperty('--indicator-left', `${left}px`);
+                tabsContainer.style.setProperty('--indicator-width', `${width}px`);
+            }
+        }
+
         // Handle tab switching
         function switchTab(category) {
             // Update active tab styling
@@ -798,6 +827,9 @@
                     tab.classList.remove('active');
                 }
             });
+
+            // Update indicator position
+            updateTabIndicator();
 
             // Load work items for selected category
             loadFeaturedWork(category);
@@ -833,6 +865,9 @@
                 const category = getCategoryFromHash();
                 switchTab(category);
             });
+
+            // Update indicator on window resize
+            window.addEventListener('resize', updateTabIndicator, { passive: true });
         });
     </script>
 
