@@ -6,6 +6,7 @@
       "description": "Unified the patient experience across a national healthcare network by connecting isolated platforms and data. This created a single, scalable system that drives consistent improvements at newly acquired clinics.",
       "outcome": "Delivered an enterprise transformation roadmap validating the consolidation of disparate legacy stacks into a single patient identity layer. Achieved a 2.5x increase in digital appointment bookings (from 20% to 50%) in pilot regions by removing friction from the scheduling journey, while establishing a governance framework that aligns clinicians around a unified, outcome-based measure of engagement.",
       "caseStudyLink": "coherence-patient-systems.html",
+      "category": "journeys",
       "active": true
     },
     {
@@ -14,6 +15,7 @@
       "description": "Orchestrated the transformation of a global social ad platform's quality enforcement ecosystem, unifying product teams, policy groups, and vendors around a shared vision. Defined the agentic service architecture that enables AI to translates decisions into customer-facing language, empowering advisors to act as growth partners rather than ticket processors.",
       "outcome": "Delivered a six-year transformation roadmap validating substantial operational savings and new revenue capacity. Identified a 14% reduction in revenue churn by redirecting support volume from low-value triage to high-value retention.",
       "caseStudyLink": "social-ad-platform-case-study.html",
+      "category": "journeys",
       "active": true
     },
     {
@@ -22,6 +24,7 @@
       "description": "Implemented a service architecture for a global auto rental company that connects vehicles, agents, and data into one coherent system, enabling proactive assistance and reducing the friction that undermines traveler confidence.",
       "outcome": "Initiated a three-year transformation program to unlock a 20% reduction in operational costs, and an identified 30% increase in revenue through an integrated AI-powered platform.",
       "caseStudyLink": "confidence-in-motion.html",
+      "category": "journeys",
       "active": true
     },
     {
@@ -30,6 +33,7 @@
       "description": "Led a strategic journey program to unify a major membership organization's fragmented experience across UX, content, benefits, and digital services. Implemented a foundational design system to integrate features and services into key journeys, activated siloed programs as a suite of mobile apps and delivered a membership roadmap creating coherence across previously siloed teams and touchpoints.",
       "outcome": "26% increase in members earning rewards points for primary activities. Defined the organization's personalization platform architecture with 12 user states and 14 activity metrics enabling 168 unique personalized experiences across all digital properties.",
       "caseStudyLink": "empowering-a-life-in-motion.html",
+      "category": "journeys",
       "active": false
     }
   ]
