@@ -514,10 +514,6 @@
         </div>
     </section>
 
-    <!-- Anchor targets for tab-specific navigation -->
-    <div id="work-1" style="height: 0; overflow: hidden;"></div>
-    <div id="work-2" style="height: 0; overflow: hidden;"></div>
-
     <section id="work" class="section container">
         <div class="work-header">
             <span class="label">Featured Work</span>
@@ -870,13 +866,19 @@
             window.location.hash = hashMap[category];
         }
 
-        // Get category from hash (#1 = journeys, #2 = product, #work-1 = journeys + scroll, #work-2 = product + scroll)
+        // Get category from URL query parameter or hash
         function getCategoryFromHash() {
-            const hash = window.location.hash.replace('#', '');
+            // First check for query parameter (?tab=journeys or ?tab=product)
+            const urlParams = new URLSearchParams(window.location.search);
+            const tabParam = urlParams.get('tab');
+            if (tabParam === 'journeys' || tabParam === 'product') {
+                return tabParam;
+            }
 
-            // Support both standalone hashes (#1, #2) and combined hashes (#work-1, #work-2)
-            if (hash === 'work-1' || hash === '1') return 'journeys';
-            if (hash === 'work-2' || hash === '2') return 'product';
+            // Fall back to hash for backwards compatibility
+            const hash = window.location.hash.replace('#', '');
+            if (hash === '1' || hash === 'work') return 'journeys';
+            if (hash === '2') return 'product';
 
             return 'journeys'; // Default to journeys
         }
