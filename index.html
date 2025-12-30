@@ -514,6 +514,10 @@
         </div>
     </section>
 
+    <!-- Invisible anchor targets for tab-specific navigation -->
+    <span id="work-1" style="position: absolute; visibility: hidden;"></span>
+    <span id="work-2" style="position: absolute; visibility: hidden;"></span>
+
     <section id="work" class="section container">
         <div class="work-header">
             <span class="label">Featured Work</span>
@@ -877,27 +881,11 @@
             return 'journeys'; // Default to journeys
         }
 
-        // Check if hash indicates we should scroll to work section
-        function shouldScrollToWork() {
-            const hash = window.location.hash.replace('#', '');
-            return hash === 'work-1' || hash === 'work-2' || hash === 'work';
-        }
-
         // Initialize tabs and load work items when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
             // Set initial category from hash or default to journeys
             const initialCategory = getCategoryFromHash();
             switchTab(initialCategory);
-
-            // Scroll to work section if hash indicates it
-            if (shouldScrollToWork()) {
-                setTimeout(() => {
-                    const workSection = document.getElementById('work');
-                    if (workSection) {
-                        workSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }, 100); // Small delay to ensure content is loaded
-            }
 
             // Add click handlers to tabs
             const tabs = document.querySelectorAll('.work-tab');
@@ -911,14 +899,6 @@
             window.addEventListener('hashchange', function() {
                 const category = getCategoryFromHash();
                 switchTab(category);
-
-                // Scroll to work section if hash indicates it
-                if (shouldScrollToWork()) {
-                    const workSection = document.getElementById('work');
-                    if (workSection) {
-                        workSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
             });
 
             // Update indicator on window resize
