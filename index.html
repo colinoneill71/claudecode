@@ -523,7 +523,7 @@
             </div>
         </div>
         <div class="work-list" id="workList">
-            <!-- Work items loaded dynamically from featured-work.json -->
+            <!-- Work items loaded dynamically via JavaScript -->
         </div>
     </section>
 
@@ -721,32 +721,82 @@
     </script>
 
     <script>
-        // Featured work data - loaded from JSON
-        let featuredWorkData = null;
-
-        // Load featured work data from JSON file
-        async function loadFeaturedWorkData() {
-            try {
-                const response = await fetch('featured-work.json');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+        // Featured work data (inline for reliability)
+        const featuredWorkData = {
+            "workItems": [
+                {
+                    "id": "coherence-patient-systems",
+                    "title": "Coherence in a Sea of Systems",
+                    "description": "Service design to unify the patient experience for a national healthcare network by connecting fragmented platforms, processes, and data into one scalable system that drives consistent improvements across newly acquired clinics.",
+                    "outcome": "Delivered an enterprise service architecture that consolidated legacy stacks into a unified patient identity layer. Increased digital appointment bookings by 30% in pilot regions by removing friction from the scheduling journey, and aligned measurement to outcome-based indicators of engagement and satisfaction.",
+                    "caseStudyLink": "coherence-patient-systems.html",
+                    "category": "journeys",
+                    "active": true
+                },
+                {
+                    "id": "trust-friction",
+                    "title": "Trust at the point of friction",
+                    "description": "Orchestrated the transformation of a global social ad platform's quality enforcement ecosystem, unifying product teams, policy groups, and vendors around a shared vision. Defined the agentic service architecture that enables AI to translate decisions into customer-facing language, empowering advisors to act as growth partners rather than ticket processors.",
+                    "outcome": "Delivered a six-year transformation roadmap validating substantial operational savings and new revenue capacity. Identified a 14% reduction in revenue churn by redirecting support volume from low-value triage to high-value retention.",
+                    "caseStudyLink": "social-ad-platform-case-study.html",
+                    "category": "journeys",
+                    "active": true
+                },
+                {
+                    "id": "confidence-motion",
+                    "title": "Confidence in motion",
+                    "description": "Implemented a service architecture for a global auto rental company that connects vehicles, agents, and data into one coherent system, enabling proactive assistance and reducing the friction that undermines traveler confidence.",
+                    "outcome": "Initiated a three-year transformation program to unlock a 20% reduction in operational costs, and an identified 30% increase in revenue through an integrated AI-powered platform.",
+                    "caseStudyLink": "confidence-in-motion.html",
+                    "category": "journeys",
+                    "active": true
+                },
+                {
+                    "id": "empowering-life-motion",
+                    "title": "Empowering a life in motion",
+                    "description": "Led a strategic journey program to unify a major membership organization's fragmented experience across UX, content, benefits, and digital services. Implemented a foundational design system to integrate features and services into key journeys, activated siloed programs as a suite of mobile apps and delivered a membership roadmap creating coherence across previously siloed teams and touchpoints.",
+                    "outcome": "26% increase in members earning rewards points for primary activities. Defined the organization's personalization platform architecture with 12 user states and 14 activity metrics enabling 168 unique personalized experiences across all digital properties.",
+                    "caseStudyLink": "empowering-a-life-in-motion.html",
+                    "category": "journeys",
+                    "active": false
+                },
+                {
+                    "id": "aarp-product",
+                    "title": "AARP Digital Platform",
+                    "description": "Product design and strategy for a next-generation member engagement platform serving 38 million members. Led the transformation of legacy systems into a unified digital experience integrating benefits, advocacy tools, and personalized content delivery.",
+                    "outcome": "Delivered a scalable product architecture enabling personalized member experiences across web and mobile. Defined the product roadmap and design system that unified 15+ disparate touchpoints into one cohesive platform.",
+                    "caseStudyLink": "aarp-case-study.html",
+                    "category": "product",
+                    "active": true
+                },
+                {
+                    "id": "toyota-product",
+                    "title": "Toyota Connected Services",
+                    "description": "Product strategy and UX design for an automotive connected services platform integrating vehicle data, mobile applications, and dealer systems. Created the service architecture connecting vehicles, drivers, and service centers into one intelligent ecosystem.",
+                    "outcome": "Launched a comprehensive connected vehicle platform driving increased customer engagement and service retention. Established design patterns and product frameworks adopted across multiple vehicle lines.",
+                    "caseStudyLink": "toyota-case-study.html",
+                    "category": "product",
+                    "active": true
+                },
+                {
+                    "id": "tbd-product",
+                    "title": "Enterprise Platform - TBD",
+                    "description": "Product design leadership for a complex enterprise platform addressing multi-stakeholder workflows and data integration challenges. Defined product vision and user experience architecture for scalable B2B solutions.",
+                    "outcome": "Delivered foundational product capabilities enabling enterprise adoption and workflow automation. Created design standards and interaction patterns supporting future platform expansion.",
+                    "caseStudyLink": "tbd-case-study.html",
+                    "category": "product",
+                    "active": true
                 }
-                featuredWorkData = await response.json();
-                return featuredWorkData;
-            } catch (error) {
-                console.error('Error loading featured work data:', error);
-                return null;
-            }
-        }
+            ]
+        };
 
         // Render featured work items by category
         function loadFeaturedWork(category = 'journeys') {
-            if (!featuredWorkData) {
-                console.error('Featured work data not loaded');
+            const workList = document.getElementById('workList');
+            if (!workList) {
+                console.error('workList element not found');
                 return;
             }
-
-            const workList = document.getElementById('workList');
 
             // Filter by active status and category
             const filteredItems = featuredWorkData.workItems.filter(item =>
@@ -755,6 +805,11 @@
 
             // Clear existing items
             workList.innerHTML = '';
+
+            if (filteredItems.length === 0) {
+                workList.innerHTML = '<p>No items found for this category.</p>';
+                return;
+            }
 
             // Render each work item using DocumentFragment for better performance
             const fragment = document.createDocumentFragment();
@@ -815,9 +870,12 @@
             // Load work items for selected category
             loadFeaturedWork(category);
 
-            // Update URL hash (1 for journeys, 2 for product)
+            // Update URL hash (1 for journeys, 2 for product) - only if different
             const hashMap = { 'journeys': '1', 'product': '2' };
-            window.location.hash = hashMap[category];
+            const targetHash = hashMap[category];
+            if (window.location.hash !== '#' + targetHash) {
+                window.location.hash = targetHash;
+            }
         }
 
         // Get category from URL query parameter or hash
@@ -838,10 +896,7 @@
         }
 
         // Initialize tabs and load work items when DOM is ready
-        document.addEventListener('DOMContentLoaded', async function() {
-            // Load featured work data from JSON
-            await loadFeaturedWorkData();
-
+        document.addEventListener('DOMContentLoaded', function() {
             // Set initial category from hash or default to journeys
             const initialCategory = getCategoryFromHash();
             switchTab(initialCategory);
