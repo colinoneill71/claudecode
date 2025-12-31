@@ -885,25 +885,12 @@
 
         // Initialize tabs and load work items when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
-            // Check for #work anchor BEFORE switchTab changes the hash
-            const shouldScrollToWork = window.location.hash === '#work';
+            // Capture if we need to scroll BEFORE switchTab changes the hash
+            const shouldScrollToWork = (window.location.hash === '#work');
 
             // Set initial category from hash or default to journeys
             const initialCategory = getCategoryFromHash();
             switchTab(initialCategory);
-
-            // Scroll to #work anchor if it was present in URL (e.g., from case study pages)
-            if (shouldScrollToWork) {
-                // Use double RAF to ensure DOM is painted, then scroll
-                requestAnimationFrame(function() {
-                    requestAnimationFrame(function() {
-                        const workSection = document.getElementById('work');
-                        if (workSection) {
-                            workSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                    });
-                });
-            }
 
             // Add click handlers to tabs
             const tabs = document.querySelectorAll('.work-tab');
@@ -921,6 +908,18 @@
 
             // Update indicator on window resize
             window.addEventListener('resize', updateTabIndicator, { passive: true });
+
+            // Scroll to work section if returning from case study
+            if (shouldScrollToWork) {
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                        const workSection = document.getElementById('work');
+                        if (workSection) {
+                            workSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    });
+                });
+            }
         });
     </script>
 
