@@ -906,7 +906,13 @@
                 });
             });
 
-            // Handle hash changes (for browser back/forward)
+            // Handle browser back/forward (popstate from pushState)
+            window.addEventListener('popstate', function() {
+                const category = getCategoryFromHash();
+                switchTab(category, false); // Don't update URL to avoid loop
+            });
+
+            // Also handle direct hash changes (for backwards compatibility)
             window.addEventListener('hashchange', function() {
                 const category = getCategoryFromHash();
                 switchTab(category, false); // Don't update URL to avoid loop
