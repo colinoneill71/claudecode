@@ -844,7 +844,7 @@
         }
 
         // Handle tab switching
-        function switchTab(category) {
+        function switchTab(category, updateURL = true) {
             // Update active tab styling
             const tabs = document.querySelectorAll('.work-tab');
             tabs.forEach(tab => {
@@ -862,8 +862,14 @@
             loadFeaturedWork(category);
 
             // Update URL hash (1 for journeys, 2 for product)
-            const hashMap = { 'journeys': '1', 'product': '2' };
-            window.location.hash = hashMap[category];
+            if (updateURL) {
+                const hashMap = { 'journeys': '1', 'product': '2' };
+                const newHash = hashMap[category];
+
+                // Remove query params when manually switching tabs
+                const newURL = window.location.pathname + '#' + newHash;
+                history.pushState(null, '', newURL);
+            }
         }
 
         // Get category from URL query parameter or hash
@@ -885,22 +891,12 @@
 
         // Initialize tabs and load work items when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
-            // Check for #work anchor BEFORE switchTab changes the hash
-            const shouldScrollToWork = window.location.hash === '#work';
+            // Capture if we need to scroll BEFORE switchTab changes the hash
+            const shouldScrollToWork = (window.location.hash === '#work');
 
             // Set initial category from hash or default to journeys
             const initialCategory = getCategoryFromHash();
             switchTab(initialCategory);
-
-            // Scroll to #work anchor if it was present in URL (e.g., from case study pages)
-            if (shouldScrollToWork) {
-                setTimeout(function() {
-                    const workSection = document.getElementById('work');
-                    if (workSection) {
-                        workSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }, 100); // Small delay to ensure content is loaded
-            }
 
             // Add click handlers to tabs
             const tabs = document.querySelectorAll('.work-tab');
@@ -910,14 +906,32 @@
                 });
             });
 
-            // Handle hash changes (for browser back/forward)
+            // Handle browser back/forward (popstate from pushState)
+            window.addEventListener('popstate', function() {
+                const category = getCategoryFromHash();
+                switchTab(category, false); // Don't update URL to avoid loop
+            });
+
+            // Also handle direct hash changes (for backwards compatibility)
             window.addEventListener('hashchange', function() {
                 const category = getCategoryFromHash();
-                switchTab(category);
+                switchTab(category, false); // Don't update URL to avoid loop
             });
 
             // Update indicator on window resize
             window.addEventListener('resize', updateTabIndicator, { passive: true });
+
+            // Scroll to work section if returning from case study
+            if (shouldScrollToWork) {
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                        const workSection = document.getElementById('work');
+                        if (workSection) {
+                            workSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    });
+                });
+            }
         });
     </script>
 
