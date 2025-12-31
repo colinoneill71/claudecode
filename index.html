@@ -894,12 +894,15 @@
 
             // Scroll to #work anchor if it was present in URL (e.g., from case study pages)
             if (shouldScrollToWork) {
-                setTimeout(function() {
-                    const workSection = document.getElementById('work');
-                    if (workSection) {
-                        workSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }, 100); // Small delay to ensure content is loaded
+                // Use double RAF to ensure DOM is painted, then scroll
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                        const workSection = document.getElementById('work');
+                        if (workSection) {
+                            workSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    });
+                });
             }
 
             // Add click handlers to tabs
