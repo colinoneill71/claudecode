@@ -885,12 +885,15 @@
 
         // Initialize tabs and load work items when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
+            // Check for #work anchor BEFORE switchTab changes the hash
+            const shouldScrollToWork = window.location.hash === '#work';
+
             // Set initial category from hash or default to journeys
             const initialCategory = getCategoryFromHash();
             switchTab(initialCategory);
 
-            // Scroll to #work anchor if present in URL (e.g., from case study pages)
-            if (window.location.hash === '#work') {
+            // Scroll to #work anchor if it was present in URL (e.g., from case study pages)
+            if (shouldScrollToWork) {
                 setTimeout(function() {
                     const workSection = document.getElementById('work');
                     if (workSection) {
