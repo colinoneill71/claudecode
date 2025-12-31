@@ -844,7 +844,7 @@
         }
 
         // Handle tab switching
-        function switchTab(category) {
+        function switchTab(category, updateURL = true) {
             // Update active tab styling
             const tabs = document.querySelectorAll('.work-tab');
             tabs.forEach(tab => {
@@ -862,8 +862,14 @@
             loadFeaturedWork(category);
 
             // Update URL hash (1 for journeys, 2 for product)
-            const hashMap = { 'journeys': '1', 'product': '2' };
-            window.location.hash = hashMap[category];
+            if (updateURL) {
+                const hashMap = { 'journeys': '1', 'product': '2' };
+                const newHash = hashMap[category];
+
+                // Remove query params when manually switching tabs
+                const newURL = window.location.pathname + '#' + newHash;
+                history.pushState(null, '', newURL);
+            }
         }
 
         // Get category from URL query parameter or hash
@@ -903,7 +909,7 @@
             // Handle hash changes (for browser back/forward)
             window.addEventListener('hashchange', function() {
                 const category = getCategoryFromHash();
-                switchTab(category);
+                switchTab(category, false); // Don't update URL to avoid loop
             });
 
             // Update indicator on window resize
