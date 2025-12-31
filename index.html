@@ -523,7 +523,7 @@
             </div>
         </div>
         <div class="work-list" id="workList">
-            <!-- Work items loaded dynamically from featured-work.json -->
+            <!-- Work items loaded dynamically via JavaScript -->
         </div>
     </section>
 
@@ -793,6 +793,10 @@
         // Render featured work items by category
         function loadFeaturedWork(category = 'journeys') {
             const workList = document.getElementById('workList');
+            if (!workList) {
+                console.error('workList element not found');
+                return;
+            }
 
             // Filter by active status and category
             const filteredItems = featuredWorkData.workItems.filter(item =>
@@ -801,6 +805,11 @@
 
             // Clear existing items
             workList.innerHTML = '';
+
+            if (filteredItems.length === 0) {
+                workList.innerHTML = '<p>No items found for this category.</p>';
+                return;
+            }
 
             // Render each work item using DocumentFragment for better performance
             const fragment = document.createDocumentFragment();
@@ -861,9 +870,12 @@
             // Load work items for selected category
             loadFeaturedWork(category);
 
-            // Update URL hash (1 for journeys, 2 for product)
+            // Update URL hash (1 for journeys, 2 for product) - only if different
             const hashMap = { 'journeys': '1', 'product': '2' };
-            window.location.hash = hashMap[category];
+            const targetHash = hashMap[category];
+            if (window.location.hash !== '#' + targetHash) {
+                window.location.hash = targetHash;
+            }
         }
 
         // Get category from URL query parameter or hash
