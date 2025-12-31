@@ -889,6 +889,16 @@
             const initialCategory = getCategoryFromHash();
             switchTab(initialCategory);
 
+            // Scroll to #work anchor if present in URL (e.g., from case study pages)
+            if (window.location.hash === '#work') {
+                setTimeout(function() {
+                    const workSection = document.getElementById('work');
+                    if (workSection) {
+                        workSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 100); // Small delay to ensure content is loaded
+            }
+
             // Add click handlers to tabs
             const tabs = document.querySelectorAll('.work-tab');
             tabs.forEach(tab => {
