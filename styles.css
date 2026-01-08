@@ -2,13 +2,13 @@
 
 /* --- GLOBAL VARIABLES & RESET --- */
 :root {
-    --bg-color: #1A1A1A;
-    --text-main: #F5F5F5;
-    --text-secondary: #B8B8B8;
-    --accent-green: #E8B86D;
-    --accent-olive: #9B7653;
-    --accent-bg: #252525;
-    --border-color: #333333;
+    --bg-color: #FFF9F0;
+    --text-main: #2a2420;
+    --text-secondary: #5a4f47;
+    --accent-green: #D4856A;
+    --accent-olive: #C99A6E;
+    --accent-bg: #FFF3E6;
+    --border-color: #F0E4D7;
     --spacing-unit: 1rem;
     --container-width: 1200px;
     --font-family-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -243,7 +243,7 @@ nav .back-link:hover {
 
 /* --- INSIGHT BOX --- */
 .insight-box {
-    background-color: #242424;
+    background-color: #FAF6F1;
     padding: 2.5rem;
     margin: 3rem 0;
     border-radius: 2px;
